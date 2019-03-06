@@ -1,0 +1,92 @@
+# Copyright (C) 2019 Mark D. Blackwell.
+
+Hungarian notation for object instances of Tk classes:
+
+3 A First (Real) Example:
+
+v_    variable          TkVariable
+
+5 Basic Widgets:
+
+f_    frame             Frame
+l_    label             Label
+b_    button            Button
+ch_   checkbutton       CheckButton
+r_    radiobutton       RadioButton
+e_    entry             Entry
+co_   combobox          Combobox
+
+7 More Widgets:
+
+li_   listbox           Listbox
+scr_  scrollbar         Scrollbar
+si_   sizegrip          SizeGrip
+t_    text              TkText
+pr_   progressbar       Progressbar
+sca_  scale             Scale
+sp_   spinbox           TkSpinbox
+
+8 Menus:
+
+me_   menu bar          Menu
+
+9 Windows and Dialogs:
+
+to_   toplevel window   TkToplevel
+m_    messagebox        messageBox
+
+10 Organizing Complex Interfaces:
+
+s_    separator         Separator
+la_   label frame       Labelframe
+pa_   paned window      Paned
+n_    notebook          Notebook
+
+11 Fonts, Colors, Images:
+
+ph_   photo image       TkPhotoImage
+
+12 Canvas:
+
+ca_   canvas            Canvas
+cal_  canvas line       TkcLine
+car_  canvas rectangle  TkcRectangle
+
+13 Text:
+
+t_    text              TkText
+
+14 Tree:
+
+tr_   tree view         Treeview
+
+===================
+Sorted:
+
+b_    button            Button
+ca_   canvas            Canvas
+cal_  canvas line       TkcLine
+car_  canvas rectangle  TkcRectangle
+ch_   checkbutton       CheckButton
+co_   combobox          Combobox
+e_    entry             Entry
+f_    frame             Frame
+l_    label             Label
+la_   label frame       Labelframe
+li_   listbox           Listbox
+m_    messagebox        messageBox
+me_   menu bar          Menu
+n_    notebook          Notebook
+pa_   paned window      Paned
+ph_   photo image       TkPhotoImage
+pr_   progressbar       Progressbar
+r_    radiobutton       RadioButton
+s_    separator         Separator
+sca_  scale             Scale
+scr_  scrollbar         Scrollbar
+si_   sizegrip          SizeGrip
+sp_   spinbox           TkSpinbox
+t_    text              TkText
+to_   toplevel window   TkToplevel
+tr_   tree view         Treeview
+v_    variable          TkVariable
