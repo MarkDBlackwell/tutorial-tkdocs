@@ -23,7 +23,10 @@ module ::FeetToMeters
 
     def root
 # There only can be a single (Tk) root in the program, so use a global:
-      $root_value ||= ::TkRoot.new
+      $root_value ||= begin
+        tell_tk_which_encoding_to_use
+        ::TkRoot.new
+      end
     end
 
     def weights_column_and_row_default_set_up(*args)
@@ -31,6 +34,13 @@ module ::FeetToMeters
         ::TkGrid.columnconfigure e, 0, weight: 1
         ::TkGrid.   rowconfigure e, 0, weight: 1
       end
+      nil
+    end
+
+    private
+
+    def tell_tk_which_encoding_to_use
+      Tk::Encoding.encoding = ''.encoding
       nil
     end
   end

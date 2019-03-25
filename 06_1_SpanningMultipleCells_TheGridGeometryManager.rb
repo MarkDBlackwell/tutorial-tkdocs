@@ -15,7 +15,17 @@ module ::SpanningMultipleCells
     end
 
     def root
-      $root_value ||= ::TkRoot.new
+      $root_value ||= begin
+        tell_tk_which_encoding_to_use
+        ::TkRoot.new
+      end
+    end
+
+    private
+
+    def tell_tk_which_encoding_to_use
+      Tk::Encoding.encoding = ''.encoding
+      nil
     end
   end
 end
