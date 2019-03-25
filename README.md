@@ -16,7 +16,7 @@ In the rewrite, I used
 for all of the object instances derived from Tk classes.
 This was in order to distinguish the Tk objects clearly from any other objects or identifiers.
 For a table presenting the prefixes, see
-[other/notes.txt](other/notes.txt).
+[other/hungarian-notation.txt](other/hungarian-notation.txt).
 
 Tested using Tk 8.5.12 and Ruby 2.2.5, on Windows 7.
 
