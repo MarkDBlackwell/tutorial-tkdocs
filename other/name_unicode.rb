@@ -18,12 +18,17 @@ module ::NameUnicode
     end
 
     def root
-      $root_value ||= ::TkRoot.new
+      $root_value ||= begin
+        tell_tk_which_encoding_to_use
+        ::TkRoot.new
+      end
     end
+
+    private
 
     def tell_tk_which_encoding_to_use
       Tk::Encoding.encoding = ''.encoding
-        nil
+      nil
     end
   end
 end
@@ -42,12 +47,9 @@ module ::NameUnicode
     end
 
     def column_1_set_up
-      e_name.grid column: 1, row: 1
-      nil
-    end
-
-    def column_2_set_up
-      b_submit.grid column: 2, row: 1
+      e_name.   grid column: 1, row: 1
+      b_submit. grid column: 1, row: 2
+      l_reflect.grid column: 1, row: 3
       nil
     end
 
@@ -58,12 +60,17 @@ module ::NameUnicode
       end
     end
 
+    def l_reflect
+      @l_reflect_value ||= begin
+        l = ::Tk::Tile::Label.new f_content
+        l.textvariable v_reflect
+      end
+    end
+
     def main
-      tell_tk_which_encoding_to_use
       v_name.value = 'привет'
 # Set up cell behavior:
       column_1_set_up
-      column_2_set_up
       ::Tk.mainloop
       nil
     end
@@ -71,6 +78,7 @@ module ::NameUnicode
     def proc_name_print
       @proc_name_print_value ||= ::Kernel.lambda do
         value = v_name.value
+        v_reflect.value = value
         puts value.encoding
         puts value.inspect
 # This works on Windows cmd, but not in ConEmu:
@@ -81,6 +89,10 @@ module ::NameUnicode
 
     def v_name
       @v_name_value ||= ::TkVariable.new
+    end
+
+    def v_reflect
+      @v_reflect_value ||= ::TkVariable.new
     end
   end
 end
