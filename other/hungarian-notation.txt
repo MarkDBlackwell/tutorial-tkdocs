@@ -2,11 +2,13 @@
 
 Hungarian notation for object instances of Tk classes:
 
-3 A First (Real) Example:
+
+Chapter 3. A First (Real) Example:
 
 v_    variable          TkVariable
 
-5 Basic Widgets:
+
+Chapter 5. Basic Widgets:
 
 f_    frame             Frame
 l_    label             Label
@@ -16,7 +18,8 @@ r_    radiobutton       RadioButton
 e_    entry             Entry
 co_   combobox          Combobox
 
-7 More Widgets:
+
+Chapter 7. More Widgets:
 
 li_   listbox           Listbox
 scr_  scrollbar         Scrollbar
@@ -26,42 +29,50 @@ pr_   progressbar       Progressbar
 sca_  scale             Scale
 sp_   spinbox           TkSpinbox
 
-8 Menus:
+
+Chapter 8. Menus:
 
 me_   menu bar          Menu
 
-9 Windows and Dialogs:
+
+Chapter 9. Windows and Dialogs:
 
 to_   toplevel window   TkToplevel
 m_    messagebox        messageBox
 
-10 Organizing Complex Interfaces:
+
+Chapter 10. Organizing Complex Interfaces:
 
 s_    separator         Separator
 la_   label frame       Labelframe
 pa_   paned window      Paned
 n_    notebook          Notebook
 
-11 Fonts, Colors, Images:
+
+Chapter 11. Fonts, Colors, Images:
 
 ph_   photo image       TkPhotoImage
 
-12 Canvas:
+
+Chapter 12. Canvas:
 
 ca_   canvas            Canvas
 cal_  canvas line       TkcLine
 car_  canvas rectangle  TkcRectangle
 
-13 Text:
+
+Chapter 13. Text:
 
 t_    text              TkText
 
-14 Tree:
+
+Chapter 14. Tree:
 
 tr_   tree view         Treeview
 
+
 ===================
-Sorted:
+Sorted alphabetically:
 
 b_    button            Button
 ca_   canvas            Canvas
