@@ -1,4 +1,5 @@
 # coding: utf-8
+
 # Copyright (C) 2019 Mark D. Blackwell.
 
 require 'tk'
@@ -30,7 +31,7 @@ module ::FeetToMeters
     end
 
     def weights_column_and_row_default_set_up(*args)
-      args.reverse.each do |e|
+      args.reverse_each do |e|
         ::TkGrid.columnconfigure e, 0, weight: 1
         ::TkGrid.   rowconfigure e, 0, weight: 1
       end
@@ -141,7 +142,7 @@ module ::FeetToMeters
         meters_per_foot = 0.3048
         begin
           v_meters.value = (v_feet * meters_per_foot).round decimal_digits
-        rescue
+        rescue ::NoMethodError
           v_meters.value = ''
         end
         nil

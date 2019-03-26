@@ -1,4 +1,5 @@
 # coding: utf-8
+
 # Copyright (C) 2019 Mark D. Blackwell.
 
 require 'tk'
@@ -22,7 +23,7 @@ module ::EventBindings
     end
 
     def weights_column_and_row_default_set_up(*args)
-      args.reverse.each do |e|
+      args.reverse_each do |e|
         ::TkGrid.columnconfigure e, 0, weight: 1
         ::TkGrid.   rowconfigure e, 0, weight: 1
       end
@@ -51,22 +52,28 @@ module ::EventBindings
     end
 
     def label_bind
-      l_label.bind '1' do
-        l_label[:text] = 'Clicked left mouse button'
-      end
+      label_bind_drag
+      label_bind_text_fixed
+      nil
+    end
 
+    def label_bind_drag
       l_label.bind 'B3-Motion', proc_drag, '%x %y'
+      nil
+    end
 
-      l_label.bind 'Double-1' do
-        l_label[:text] = 'Double clicked'
-      end
-
-      l_label.bind 'Enter' do
-        l_label[:text] = 'Moved mouse inside'
-      end
-
-      l_label.bind 'Leave' do
-        l_label[:text] = 'Moved mouse outside'
+    def label_bind_text_fixed
+      key_symbol = %w[  1  Double-1  Enter  Leave  ]
+      text = %w[
+          Clicked\ left\ mouse\ button
+          Double\ clicked
+          Moved\ mouse\ inside
+          Moved\ mouse\ outside
+          ]
+      key_symbol.zip(text).each do |k,t|
+        l_label.bind k do
+          l_label[:text] = t
+        end
       end
       nil
     end

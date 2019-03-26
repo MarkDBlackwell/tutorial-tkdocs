@@ -1,4 +1,5 @@
 # coding: utf-8
+
 # Copyright (C) 2019 Mark D. Blackwell.
 
 require 'tk'
@@ -11,7 +12,7 @@ module ::AlertAndConfirmationDialogs
     def details
       @details_value ||= begin
         relevant = group.drop 1
-        relevant.map{|e| e.center width}.join "\n"
+        relevant.map {|e| e.center width}.join "\n"
       end
     end
 
@@ -22,16 +23,16 @@ module ::AlertAndConfirmationDialogs
     private
 
     def group
-      @group_value ||= raw.lines.map &:chomp
+      @group_value ||= raw.lines.map(&:strip)
     end
 
     def raw
-      @raw_value ||= <<END
-Program-name Program-version
-Copyright (c) Year Developer-name
-License
-Contact: Developer-email
-END
+      @raw_value ||= <<END_RAW
+  Program-name Program-version
+  Copyright (c) Year Developer-name
+  License
+  Contact: Developer-email
+END_RAW
     end
 
     def width
@@ -58,7 +59,7 @@ module ::AlertAndConfirmationDialogs
     end
 
     def weights_column_and_row_default_set_up(*args)
-      args.reverse.each do |e|
+      args.reverse_each do |e|
         ::TkGrid.columnconfigure e, 0, weight: 1
         ::TkGrid.   rowconfigure e, 0, weight: 1
       end
@@ -99,7 +100,7 @@ module ::AlertAndConfirmationDialogs
 
     def proc_about
       @proc_about_value ||= ::Kernel.lambda do
-        ::Tk::messageBox message: About.program, detail: About.details
+        ::Tk.messageBox message: About.program, detail: About.details
         nil
       end
     end

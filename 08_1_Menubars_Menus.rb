@@ -1,4 +1,5 @@
 # coding: utf-8
+
 # Copyright (C) 2019 Mark D. Blackwell.
 
 require 'tk'
@@ -36,7 +37,7 @@ module ::Menubars
     end
 
     def weights_column_and_row_default_set_up(*args)
-      args.reverse.each do |e|
+      args.reverse_each do |e|
         ::TkGrid.columnconfigure e, 0, weight: 1
         ::TkGrid.   rowconfigure e, 0, weight: 1
       end
@@ -80,15 +81,26 @@ module ::Menubars
     end
 
     def menu_file_items_add
-# Add file action menu items:
+      menu_file_items_file_actions_add
+      me_file.add :separator
+      menu_file_items_checkbutton_add
+      menu_file_items_radiobuttons_add
+      nil
+    end
+
+    def menu_file_items_checkbutton_add
+      me_file.add :checkbutton, label: 'Check',   command: proc_check,      underline: 1, variable: v_check, onvalue: 1, offvalue: 0
+      nil
+    end
+
+    def menu_file_items_file_actions_add
       me_file.add :command,     label: 'New',     command: proc_file_new,   underline: 0
       me_file.add :command,     label: 'Open...', command: proc_file_open,  underline: 0
       me_file.add :command,     label: 'Close',   command: proc_file_close, underline: 0
-# Add separator:
-      me_file.add :separator
-# Add checkbutton:
-      me_file.add :checkbutton, label: 'Check',   command: proc_check,      underline: 1, variable: v_check, onvalue: 1, offvalue: 0
-# Add radiobuttons:
+      nil
+    end
+
+    def menu_file_items_radiobuttons_add
       me_file.add :radiobutton, label: 'One',     command: proc_one,        underline: 2, variable: v_radio, value: 1
       me_file.add :radiobutton, label: 'Two',     command: proc_two,        underline: 0, variable: v_radio, value: 2
       nil

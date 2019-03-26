@@ -1,4 +1,5 @@
 # coding: utf-8
+
 # Copyright (C) 2019 Mark D. Blackwell.
 
 require 'tk'
@@ -45,7 +46,7 @@ module ::Decoration
     end
 
     def weights_column_and_row_default_set_up(*args)
-      args.reverse.each do |e|
+      args.reverse_each do |e|
         ::TkGrid.columnconfigure e, 0, weight: 1
         ::TkGrid.   rowconfigure e, 0, weight: 1
       end
@@ -102,17 +103,26 @@ module ::Decoration
     end
 
     def color_picker_create(y_box, color, tag_list)
-      options = {fill: color, tags: "palette #{tag_list}"}
+      options = { fill: color, tags: "palette #{tag_list}" }
       x_box = 10, 30
       box = x_box.zip(y_box).flatten
       ::TkcRectangle.new ca_canvas, *box, options
     end
 
     def event_bindings_set_up
+      event_bindings_set_up_canvas
+      event_bindings_set_up_color_pickers
+      nil
+    end
+
+    def event_bindings_set_up_canvas
       ca_canvas.bind '1',                proc_segment_start,  '%x %y'
       ca_canvas.bind 'B1-ButtonRelease', proc_stroke_done
       ca_canvas.bind 'B1-Motion',        proc_segment_append, '%x %y'
+      nil
+    end
 
+    def event_bindings_set_up_color_pickers
       car_color_picker_black.bind '1', proc_color_set, :black
       car_color_picker_blue. bind '1', proc_color_set, :blue
       car_color_picker_red.  bind '1', proc_color_set, :red
@@ -147,7 +157,7 @@ module ::Decoration
     def proc_segment_append
       @proc_segment_append_value ||= ::Kernel.lambda do |x_end, y_end|
         segment_width_thicker = 2
-        options = {fill: Color.value, width: segment_width_thicker, tags: :currentLine}
+        options = { fill: Color.value, width: segment_width_thicker, tags: :currentLine }
         x_start, y_start = Position.value
         ::TkcLine.new ca_canvas, x_start, y_start, x_end, y_end, options
         Position.set x_end, y_end

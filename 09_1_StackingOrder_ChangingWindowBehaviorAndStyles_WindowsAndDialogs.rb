@@ -1,4 +1,5 @@
 # coding: utf-8
+
 # Copyright (C) 2019 Mark D. Blackwell.
 
 require 'tk'
@@ -22,7 +23,7 @@ module ::StackingOrder
     end
 
     def weights_column_and_row_default_set_up(*args)
-      args.reverse.each do |e|
+      args.reverse_each do |e|
         ::TkGrid.columnconfigure e, 0, weight: 1
         ::TkGrid.   rowconfigure e, 0, weight: 1
       end
@@ -49,7 +50,6 @@ module ::StackingOrder
         l.text 'Much Bigger Label'
         l.grid column: 0, row: 0, sticky: :w
       end
-
     end
 
     def l_little

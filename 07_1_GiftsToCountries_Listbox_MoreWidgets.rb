@@ -1,4 +1,5 @@
 # coding: utf-8
+
 # Copyright (C) 2019 Mark D. Blackwell.
 
 require 'tk'
@@ -39,13 +40,13 @@ module ::GiftsToCountries
 
     def country_populations
       @country_populations_value ||= [
-          41000000, 21179211, 10584534,
-          185971537, 33148682, 1323128240,
-          5457415, 5302000, 64102140,
-          11147000, 1131043000, 59206382,
-          127718000, 106535000, 16402414,
-          4738085, 45116894, 9174082,
-          7508700,
+           41_000_000,     21_179_211,     10_584_534,
+          185_971_537,     33_148_682,  1_323_128_240,
+            5_457_415,      5_302_000,     64_102_140,
+           11_147_000,  1_131_043_000,     59_206_382,
+          127_718_000,    106_535_000,     16_402_414,
+            4_738_085,     45_116_894,      9_174_082,
+            7_508_700,
           ]
     end
   end
@@ -85,7 +86,7 @@ module ::GiftsToCountries
     end
 
     def weights_column_and_row_default_set_up(*args)
-      args.reverse.each do |e|
+      args.reverse_each do |e|
         ::TkGrid.columnconfigure e, 0, weight: 1
         ::TkGrid.   rowconfigure e, 0, weight: 1
       end
@@ -111,7 +112,7 @@ module ::GiftsToCountries
     def b_send
       @b_send_value ||= begin
         b = ::Tk::Tile::Button.new f_content
-        b.command proc_send_gift # Callback.
+        b.command proc_gift_send # Callback.
         b.default :active
         b.text 'Send Gift'
       end
@@ -150,11 +151,20 @@ module ::GiftsToCountries
 # - when the user double clicks the list; and
 # - when they hit the Return key.
 
-      li_countries.bind '<ListboxSelect>', proc_show_population
-      li_countries.bind 'Double-1', proc_send_gift
+      li_countries.bind '<ListboxSelect>', proc_country_select
+      li_countries.bind 'Double-1', proc_gift_send
 
 # Backstop every other widget in the tree:
-      root.bind 'Return', proc_send_gift
+      root.bind 'Return', proc_gift_send
+      nil
+    end
+
+    def feedback_provide(index)
+      key = v_gift.value.to_sym
+# In order to prevent KeyError exception, supply a default value:
+      a = gifts.fetch key, gifts.default
+      b = country_names.at index
+      v_sent.value = "Sent #{a} to the leader of #{b}."
       nil
     end
 
@@ -206,12 +216,38 @@ module ::GiftsToCountries
 
 # Because the ListboxSelect event normally is generated only when the user
 # makes a change, start by explicitly showing the population:
-      proc_show_population.call
+      proc_country_select.call
       ::Tk.mainloop
       nil
     end
 
-    def proc_send_gift
+    def population_show(index)
+      i = index
+      a = country_names.at i
+      b = country_codes.at i
+      c = country_populations.at i
+      v_status.value = "The population of #{a} (#{b}) is #{c}."
+      nil
+    end
+
+    def proc_country_select
+# Called when the selection in the listbox changes.
+# Figure out which country is currently selected, and look up its country code
+# and population. Update the status message with the new population. Clear the
+# message about the gift being sent, so it doesn't stick around after we start
+# doing other things:
+
+      @proc_country_select_value ||= ::Kernel.lambda do
+        selected = li_countries.curselection
+        v_sent.value = ''
+        return unless 1 == selected.length
+
+        population_show selected.first
+        nil
+      end
+    end
+
+    def proc_gift_send
 # Called when the user double clicks an item in the listbox, presses the
 # 'Send Gift' button, or presses the Return key.
 # In case the selected item is scrolled out of view, make sure it is visible.
@@ -219,37 +255,14 @@ module ::GiftsToCountries
 # Figure out which country is selected, and which gift is selected with the
 # radiobuttons. Send the gift, and provide feedback that it was sent:
 
-      @proc_send_gift_value ||= ::Kernel.lambda do
+      @proc_gift_send_value ||= ::Kernel.lambda do
         selected = li_countries.curselection
-        return unless 1==selected.length
+        return unless 1 == selected.length
+
         i = selected.first
         li_countries.see i
 # Actually sending the gift is left as an exercise to the reader.
-        key = v_gift.value.to_sym
-# In order to prevent KeyError exception, supply a default value:
-        a = gifts.fetch key, gifts.default
-        b = country_names.at i
-        v_sent.value = "Sent #{a} to the leader of #{b}."
-        nil
-      end
-    end
-
-    def proc_show_population
-# Called when the selection in the listbox changes.
-# Figure out which country is currently selected, and look up its country code
-# and population. Update the status message with the new population. Clear the
-# message about the gift being sent, so it doesn't stick around after we start
-# doing other things:
-
-      @proc_show_population_value ||= ::Kernel.lambda do
-        selected = li_countries.curselection
-        v_sent.value = ''
-        return unless 1==selected.length
-        i = selected.first
-        a = country_names.at i
-        b = country_codes.at i
-        c = country_populations.at i
-        v_status.value = "The population of #{a} (#{b}) is #{c}."
+        feedback_provide i
         nil
       end
     end
@@ -308,7 +321,6 @@ module ::GiftsToCountries
       ::TkGrid.   rowconfigure f_content, 5, weight: 1
       nil
     end
-
   end
 end
 

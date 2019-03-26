@@ -1,4 +1,5 @@
 # coding: utf-8
+
 # Copyright (C) 2019 Mark D. Blackwell.
 
 require 'tk'
@@ -29,7 +30,7 @@ module ::OneHundredLines
     end
 
     def weights_column_and_row_default_set_up(*args)
-      args.reverse.each do |e|
+      args.reverse_each do |e|
         ::TkGrid.columnconfigure e, 0, weight: 1
         ::TkGrid.   rowconfigure e, 0, weight: 1
       end
@@ -61,9 +62,10 @@ module ::OneHundredLines
 
     def li_listbox
       @li_listbox_value ||= begin
+        proc_set = proc {|*args| scr_scrollbar.set(*args)}
         l = ::TkListbox.new f_content
         l.height 5
-        l.yscrollcommand proc{|*args| scr_scrollbar.set *args}
+        l.yscrollcommand proc_set
         l.grid column: 0, row: 0, sticky: :wnes
       end
     end
@@ -87,8 +89,9 @@ module ::OneHundredLines
 
     def scr_scrollbar
       @scr_scrollbar_value ||= begin
+        proc_view = proc {|*args| li_listbox.yview(*args)}
         s = ::Tk::Tile::Scrollbar.new f_content
-        s.command proc{|*args| li_listbox.yview *args}
+        s.command proc_view
         s.orient :vertical
         s.grid column: 1, row: 0, sticky: :ns
       end

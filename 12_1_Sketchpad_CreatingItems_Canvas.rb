@@ -1,4 +1,5 @@
 # coding: utf-8
+
 # Copyright (C) 2019 Mark D. Blackwell.
 
 require 'tk'
@@ -37,7 +38,7 @@ module ::Sketchpad
     end
 
     def weights_column_and_row_default_set_up(*args)
-      args.reverse.each do |e|
+      args.reverse_each do |e|
         ::TkGrid.columnconfigure e, 0, weight: 1
         ::TkGrid.   rowconfigure e, 0, weight: 1
       end
@@ -66,6 +67,11 @@ module ::Sketchpad
     end
 
     def event_bindings_set_up
+      event_bindings_set_up_canvas
+      nil
+    end
+
+    def event_bindings_set_up_canvas
       ca_canvas.bind '1',         proc_segment_start,  '%x %y'
       ca_canvas.bind 'B1-Motion', proc_segment_append, '%x %y'
       nil

@@ -1,0 +1,87 @@
+Layout/AlignArray:
+  Enabled: false
+
+Layout/CommentIndentation:
+  Enabled: false
+
+Layout/ElseAlignment:
+  Enabled: false
+
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: beginning_only
+
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+Layout/EndAlignment:
+  Enabled: false
+
+Layout/EndOfLine:
+  Enabled: false
+
+Layout/ExtraSpacing:
+  Enabled: false
+
+Layout/IndentArray:
+  IndentationWidth: 4
+  Enabled: false
+
+Layout/IndentationWidth:
+  Enabled: false
+
+Layout/SpaceAfterComma:
+  Enabled: false
+
+Layout/SpaceInsideArrayPercentLiteral:
+  Enabled: false
+
+Layout/SpaceInsideBlockBraces:
+  Enabled: false
+
+Layout/SpaceInsidePercentLiteralDelimiters:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Naming/FileName:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/Encoding:
+  Enabled: false
+
+Style/GlobalVars:
+  Enabled: false
+
+Style/ModuleFunction:
+  Enabled: false
+
+Style/ParallelAssignment:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+
+Style/YodaCondition:
+  Enabled: false

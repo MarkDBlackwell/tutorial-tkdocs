@@ -1,4 +1,5 @@
 # coding: utf-8
+
 # Copyright (C) 2019 Mark D. Blackwell.
 
 require 'tk'
@@ -36,7 +37,7 @@ module ::ContextMenus
     end
 
     def weights_column_and_row_default_set_up(*args)
-      args.reverse.each do |e|
+      args.reverse_each do |e|
         ::TkGrid.columnconfigure e, 0, weight: 1
         ::TkGrid.   rowconfigure e, 0, weight: 1
       end
@@ -58,7 +59,7 @@ module ::ContextMenus
     extend self
 
     def context_menu_events_bind
-      events = if 'aqua'==platform # Mac OS X windowing system.
+      events = if 'aqua' == platform # Mac OS X windowing system.
         %w[ 2  Control-1 ]
       else
 # App is the symbolic representation of Microsoft Windows' Context Menu key.

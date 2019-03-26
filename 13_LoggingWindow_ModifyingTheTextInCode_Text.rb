@@ -1,4 +1,5 @@
 # coding: utf-8
+
 # Copyright (C) 2019 Mark D. Blackwell.
 
 require 'tk'
@@ -22,7 +23,7 @@ module ::LoggingWindow
     end
 
     def weights_column_and_row_default_set_up(*args)
-      args.reverse.each do |e|
+      args.reverse_each do |e|
         ::TkGrid.columnconfigure e, 0, weight: 1
         ::TkGrid.   rowconfigure e, 0, weight: 1
       end
@@ -51,11 +52,24 @@ module ::LoggingWindow
       nil
     end
 
-    def log_write(message)
-      line_count = t_log.index('end - 1 line').split('.').first.to_i
-      t_log[:state] = :normal
-      t_log.delete 1.0, 2.0 unless line_count < 24
+    def log_delete_some_maybe
+      t_log.delete 1.0, 2.0 unless log_line_count < 24
+      nil
+    end
+
+    def log_line_count
+      t_log.index('end - 1 line').split('.').first.to_i
+    end
+
+    def log_newline_append_maybe
       t_log.insert :end, "\n" unless '1.0' == (t_log.index 'end-1c')
+      nil
+    end
+
+    def log_write(message)
+      t_log[:state] = :normal
+      log_delete_some_maybe
+      log_newline_append_maybe
       t_log.insert :end, message
       t_log[:state] = :disabled
       nil
