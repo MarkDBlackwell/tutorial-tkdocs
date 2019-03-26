@@ -44,6 +44,16 @@ module ::PanedWindows
     extend GraphicalHelper
     extend self
 
+    def main
+      f_content.padding '3 3 3 3'
+      weights_column_and_row_set_up
+      add_frames_to_paned_windows
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def add_frames_to_paned_windows
       pa_horizontal.add la_horizontal_1
       pa_horizontal.add la_horizontal_2
@@ -87,14 +97,6 @@ module ::PanedWindows
     def labelframe_set_up(orientation)
       l = ::Tk::Tile::Labelframe.new orientation
       l.height 100
-    end
-
-    def main
-      f_content.padding '3 3 3 3'
-      weights_column_and_row_set_up
-      add_frames_to_paned_windows
-      ::Tk.mainloop
-      nil
     end
 
     def pa_horizontal

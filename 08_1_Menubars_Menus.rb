@@ -66,6 +66,8 @@ module ::Menubars
       nil
     end
 
+    private
+
     def me_edit
       @me_edit_value ||= ::TkMenu.new me_menubar
     end

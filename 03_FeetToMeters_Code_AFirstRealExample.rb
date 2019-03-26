@@ -52,6 +52,21 @@ module ::FeetToMeters
     extend GraphicalHelper
     extend self
 
+    def main
+      weights_column_and_row_set_up
+      root.title 'Feet to Meters'
+      return_bind
+      column_1_set_up
+      column_2_set_up
+      column_3_set_up
+      pad_grid_boxes # Keep below where we fill the grid.
+      proc_calculate_and_focus.call
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def column_1_set_up
       l = ::Tk::Tile::Label.new f_content
       l.text 'is equivalent to'
@@ -112,19 +127,6 @@ module ::FeetToMeters
         e.textvariable v_feet
         e.width 7
       end
-    end
-
-    def main
-      weights_column_and_row_set_up
-      root.title 'Feet to Meters'
-      return_bind
-      column_1_set_up
-      column_2_set_up
-      column_3_set_up
-      pad_grid_boxes # Keep below where we fill the grid.
-      proc_calculate_and_focus.call
-      ::Tk.mainloop
-      nil
     end
 
     def pad_grid_boxes

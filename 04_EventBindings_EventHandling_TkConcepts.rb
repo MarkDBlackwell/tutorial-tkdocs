@@ -44,6 +44,17 @@ module ::EventBindings
     extend GraphicalHelper
     extend self
 
+    def main
+      f_content.padding '3 3 3 3'
+      weights_column_and_row_set_up
+      l_label[:text] = 'Starting...'
+      label_bind
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def l_label
       @l_label_value ||= begin
         l = ::Tk::Tile::Label.new f_content
@@ -75,15 +86,6 @@ module ::EventBindings
           l_label[:text] = t
         end
       end
-      nil
-    end
-
-    def main
-      f_content.padding '3 3 3 3'
-      weights_column_and_row_set_up
-      l_label[:text] = 'Starting...'
-      label_bind
-      ::Tk.mainloop
       nil
     end
 

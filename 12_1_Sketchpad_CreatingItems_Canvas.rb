@@ -59,6 +59,16 @@ module ::Sketchpad
     extend GraphicalHelper
     extend self
 
+    def main
+      f_content.padding '3 3 3 3'
+      weights_column_and_row_set_up
+      event_bindings_set_up
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def ca_canvas
       @ca_canvas_value ||= begin
         c = ::TkCanvas.new f_content
@@ -74,14 +84,6 @@ module ::Sketchpad
     def event_bindings_set_up_canvas
       ca_canvas.bind '1',         proc_segment_start,  '%x %y'
       ca_canvas.bind 'B1-Motion', proc_segment_append, '%x %y'
-      nil
-    end
-
-    def main
-      f_content.padding '3 3 3 3'
-      weights_column_and_row_set_up
-      event_bindings_set_up
-      ::Tk.mainloop
       nil
     end
 

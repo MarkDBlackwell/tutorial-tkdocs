@@ -67,6 +67,17 @@ module ::ColorPicker
     extend GraphicalHelper
     extend self
 
+    def main
+      f_content.padding '3 3 3 3'
+      weights_column_and_row_set_up
+      event_bindings_set_up
+      color_initial_set
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def ca_canvas
       @ca_canvas_value ||= begin
         c = ::TkCanvas.new f_content
@@ -123,15 +134,6 @@ module ::ColorPicker
       car_color_picker_black.bind '1', proc_color_set, :black
       car_color_picker_blue. bind '1', proc_color_set, :blue
       car_color_picker_red.  bind '1', proc_color_set, :red
-      nil
-    end
-
-    def main
-      f_content.padding '3 3 3 3'
-      weights_column_and_row_set_up
-      event_bindings_set_up
-      color_initial_set
-      ::Tk.mainloop
       nil
     end
 

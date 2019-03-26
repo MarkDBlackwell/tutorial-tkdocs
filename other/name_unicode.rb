@@ -39,6 +39,16 @@ module ::NameUnicode
     extend GraphicalHelper
     extend self
 
+    def main
+      v_name.value = 'привет'
+# Set up cell behavior:
+      column_1_set_up
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def b_submit
       @b_submit_value ||= begin
         b = ::Tk::Tile::Button.new f_content
@@ -66,14 +76,6 @@ module ::NameUnicode
         l = ::Tk::Tile::Label.new f_content
         l.textvariable v_reflect
       end
-    end
-
-    def main
-      v_name.value = 'привет'
-# Set up cell behavior:
-      column_1_set_up
-      ::Tk.mainloop
-      nil
     end
 
     def proc_name_print

@@ -44,6 +44,17 @@ module ::Notebook
     extend GraphicalHelper
     extend self
 
+    def main
+      f_content.padding '3 3 3 3'
+      weights_column_and_row_set_up
+      tabs_add
+      labels_add
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
 # For each tab, create a frame, into which widgets can be gridded:
 
     def f_tab_1
@@ -86,15 +97,6 @@ module ::Notebook
       l_label_1
       l_label_2
       l_label_3
-      nil
-    end
-
-    def main
-      f_content.padding '3 3 3 3'
-      weights_column_and_row_set_up
-      tabs_add
-      labels_add
-      ::Tk.mainloop
       nil
     end
 

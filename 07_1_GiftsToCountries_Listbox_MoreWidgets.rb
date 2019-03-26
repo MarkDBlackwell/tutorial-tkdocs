@@ -109,6 +109,24 @@ module ::GiftsToCountries
     extend GraphicalHelper
     extend self
 
+    def main
+      f_content.padding '5 5 12 0'
+      weights_column_and_row_set_up
+      grid_all_the_widgets
+      event_bindings_set_up
+      colorize_alternating_lines_of_the_listbox
+      first_country_in_the_list = 0
+      li_countries.selection_set first_country_in_the_list
+
+# Because the ListboxSelect event normally is generated only when the user
+# makes a change, start by explicitly showing the population:
+      proc_country_select.call
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def b_send
       @b_send_value ||= begin
         b = ::Tk::Tile::Button.new f_content
@@ -203,22 +221,6 @@ module ::GiftsToCountries
         l.height 5
         l.listvariable v_country_names
       end
-    end
-
-    def main
-      f_content.padding '5 5 12 0'
-      weights_column_and_row_set_up
-      grid_all_the_widgets
-      event_bindings_set_up
-      colorize_alternating_lines_of_the_listbox
-      first_country_in_the_list = 0
-      li_countries.selection_set first_country_in_the_list
-
-# Because the ListboxSelect event normally is generated only when the user
-# makes a change, start by explicitly showing the population:
-      proc_country_select.call
-      ::Tk.mainloop
-      nil
     end
 
     def population_show(index)

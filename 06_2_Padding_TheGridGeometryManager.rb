@@ -44,6 +44,21 @@ module ::Padding
     extend GraphicalHelper
     extend self
 
+    def main
+      f_content.padding '3 3 12 12'
+      weights_column_and_row_set_up
+# Set up cell behavior:
+      column_0_set_up
+      column_1_set_up
+      column_2_set_up
+      column_3_set_up
+      column_4_set_up
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def b_cancel
       @b_cancel_value ||= begin
         b = ::Tk::Tile::Button.new f_content
@@ -139,19 +154,6 @@ module ::Padding
         l = ::Tk::Tile::Label.new f_content
         l.text 'Name'
       end
-    end
-
-    def main
-      f_content.padding '3 3 12 12'
-      weights_column_and_row_set_up
-# Set up cell behavior:
-      column_0_set_up
-      column_1_set_up
-      column_2_set_up
-      column_3_set_up
-      column_4_set_up
-      ::Tk.mainloop
-      nil
     end
 
     def weights_column_and_row_set_up

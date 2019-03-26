@@ -80,15 +80,6 @@ module ::AlertAndConfirmationDialogs
     extend GraphicalHelper
     extend self
 
-    def f_frame_inner
-      @f_frame_inner_value ||= begin
-        f = ::Tk::Tile::Frame.new f_content
-        f.height 100
-        f.width 200
-        f.grid
-      end
-    end
-
     def main
       f_content.padding '3 3 3 3'
       weights_column_and_row_set_up
@@ -96,6 +87,17 @@ module ::AlertAndConfirmationDialogs
       raise_later
       ::Tk.mainloop
       nil
+    end
+
+    private
+
+    def f_frame_inner
+      @f_frame_inner_value ||= begin
+        f = ::Tk::Tile::Frame.new f_content
+        f.height 100
+        f.width 200
+        f.grid
+      end
     end
 
     def proc_about

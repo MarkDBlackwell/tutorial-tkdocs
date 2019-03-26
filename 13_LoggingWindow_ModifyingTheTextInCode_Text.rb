@@ -44,6 +44,15 @@ module ::LoggingWindow
     extend GraphicalHelper
     extend self
 
+    def main
+      weights_column_and_row_set_up
+      lines_write
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def lines_write
       size = 25
       size.times.each do |i|
@@ -72,13 +81,6 @@ module ::LoggingWindow
       log_newline_append_maybe
       t_log.insert :end, message
       t_log[:state] = :disabled
-      nil
-    end
-
-    def main
-      weights_column_and_row_set_up
-      lines_write
-      ::Tk.mainloop
       nil
     end
 

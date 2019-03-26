@@ -44,20 +44,22 @@ module ::HelloWorld
     extend GraphicalHelper
     extend self
 
-    def b_button
-      @b_button_value ||= begin
-        b = ::Tk::Tile::TButton.new f_content
-        b.text 'Hello, world!'
-        b.grid
-      end
-    end
-
     def main
       f_content.padding '0 0 0 0'
       weights_column_and_row_set_up
       b_button
       ::Tk.mainloop
       nil
+    end
+
+    private
+
+    def b_button
+      @b_button_value ||= begin
+        b = ::Tk::Tile::TButton.new f_content
+        b.text 'Hello, world!'
+        b.grid
+      end
     end
 
     def weights_column_and_row_set_up

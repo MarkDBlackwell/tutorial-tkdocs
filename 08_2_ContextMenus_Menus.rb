@@ -58,6 +58,19 @@ module ::ContextMenus
     extend GraphicalHelper
     extend self
 
+    def main
+      f_content.padding '3 3 3 3'
+      weights_column_and_row_set_up
+      tear_off_prevent # Keep before any menu creation.
+      f_frame_inner
+      context_menu_items_add
+      context_menu_events_bind
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def context_menu_events_bind
       events = if 'aqua' == platform # Mac OS X windowing system.
         %w[ 2  Control-1 ]
@@ -86,17 +99,6 @@ module ::ContextMenus
         f.width 200
         f.grid
       end
-    end
-
-    def main
-      f_content.padding '3 3 3 3'
-      weights_column_and_row_set_up
-      tear_off_prevent # Keep before any menu creation.
-      f_frame_inner
-      context_menu_items_add
-      context_menu_events_bind
-      ::Tk.mainloop
-      nil
     end
 
     def proc_item

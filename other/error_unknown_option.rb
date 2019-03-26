@@ -8,6 +8,18 @@ require 'tkextlib/tile'
 module ::UnknownOption
   class Graphical
 
+    def main
+      root = ::TkRoot.new
+      $f_content = ::Tk::Tile::Frame.new root do
+      end.grid
+
+      good
+      bad
+      ::Tk.mainloop
+    end
+
+    private
+
     def bad
       a = v_bad
       e_bad = ::Tk::Tile::Entry.new $f_content do
@@ -24,16 +36,6 @@ module ::UnknownOption
         textvariable v_good
       end
       e_good.grid
-    end
-
-    def main
-      root = ::TkRoot.new
-      $f_content = ::Tk::Tile::Frame.new root do
-      end.grid
-
-      good
-      bad
-      ::Tk.mainloop
     end
 
     def v_bad

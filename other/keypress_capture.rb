@@ -30,6 +30,16 @@ module ::KeypressCapture
     extend GraphicalHelper
     extend self
 
+    def main
+      f_content.padding '3 3 3 3'
+      f_frame_inner
+      events_bind
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def events_bind
       root.bind :KeyPress, proc_keypress, '%k %K'
       nil
@@ -42,14 +52,6 @@ module ::KeypressCapture
         f.width 200
         f.grid
       end
-    end
-
-    def main
-      f_content.padding '3 3 3 3'
-      f_frame_inner
-      events_bind
-      ::Tk.mainloop
-      nil
     end
 
     def proc_keypress

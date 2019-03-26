@@ -51,6 +51,18 @@ module ::OneHundredLines
     extend GraphicalHelper
     extend self
 
+    def main
+      f_content.padding '3 3 3 3'
+      weights_column_and_row_set_up
+      si_sizegrip
+      l_status_message
+      listbox_lines_insert
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def l_status_message
       @l_status_message_value ||= begin
         l = ::Tk::Tile::Label.new f_content
@@ -74,16 +86,6 @@ module ::OneHundredLines
       100.times.each do |i|
         li_listbox.insert :end, "Line #{i + 1} of 100"
       end
-      nil
-    end
-
-    def main
-      f_content.padding '3 3 3 3'
-      weights_column_and_row_set_up
-      si_sizegrip
-      l_status_message
-      listbox_lines_insert
-      ::Tk.mainloop
       nil
     end
 

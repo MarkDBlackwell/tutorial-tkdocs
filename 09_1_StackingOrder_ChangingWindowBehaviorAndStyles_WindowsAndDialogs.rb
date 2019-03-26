@@ -44,6 +44,17 @@ module ::StackingOrder
     extend GraphicalHelper
     extend self
 
+    def main
+      f_content.padding '3 0 3 0'
+      weights_column_and_row_set_up
+      l_bigger
+      raise_later
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def l_bigger
       @l_bigger_value ||= begin
         l = ::Tk::Tile::Label.new f_content
@@ -58,15 +69,6 @@ module ::StackingOrder
         l.text 'Little'
         l.grid column: 0, row: 0, sticky: :w
       end
-    end
-
-    def main
-      f_content.padding '3 0 3 0'
-      weights_column_and_row_set_up
-      l_bigger
-      raise_later
-      ::Tk.mainloop
-      nil
     end
 
     def proc_raise

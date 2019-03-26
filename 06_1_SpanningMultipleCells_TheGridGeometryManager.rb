@@ -36,6 +36,19 @@ module ::SpanningMultipleCells
     extend GraphicalHelper
     extend self
 
+    def main
+# Set up cell behavior:
+      column_0_set_up
+      column_1_set_up
+      column_2_set_up
+      column_3_set_up
+      column_4_set_up
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def b_cancel
       @b_cancel_value ||= begin
         b = ::Tk::Tile::Button.new f_content
@@ -131,17 +144,6 @@ module ::SpanningMultipleCells
         l = ::Tk::Tile::Label.new f_content
         l.text 'Name'
       end
-    end
-
-    def main
-# Set up cell behavior:
-      column_0_set_up
-      column_1_set_up
-      column_2_set_up
-      column_3_set_up
-      column_4_set_up
-      ::Tk.mainloop
-      nil
     end
   end
 end
