@@ -40,8 +40,22 @@ module ::HelloWorld
 end
 
 module ::HelloWorld
+  module GraphicalObjects
+
+    def b_button
+      @b_button_value ||= begin
+        b = ::Tk::Tile::TButton.new f_content
+        b.text 'Hello, world!'
+        b.grid
+      end
+    end
+  end
+end
+
+module ::HelloWorld
   module Graphical
     extend GraphicalHelper
+    extend GraphicalObjects
     extend self
 
     def main
@@ -53,14 +67,6 @@ module ::HelloWorld
     end
 
     private
-
-    def b_button
-      @b_button_value ||= begin
-        b = ::Tk::Tile::TButton.new f_content
-        b.text 'Hello, world!'
-        b.grid
-      end
-    end
 
     def weights_column_and_row_set_up
       weights_column_and_row_default_set_up f_content, root

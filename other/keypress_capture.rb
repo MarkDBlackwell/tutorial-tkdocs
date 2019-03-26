@@ -26,8 +26,23 @@ module ::KeypressCapture
 end
 
 module ::KeypressCapture
+  module GraphicalObjects
+
+    def f_frame_inner
+      @f_frame_inner_value ||= begin
+        f = ::Tk::Tile::Frame.new f_content
+        f.height 100
+        f.width 200
+        f.grid
+      end
+    end
+  end
+end
+
+module ::KeypressCapture
   module Graphical
     extend GraphicalHelper
+    extend GraphicalObjects
     extend self
 
     def main
@@ -43,15 +58,6 @@ module ::KeypressCapture
     def events_bind
       root.bind :KeyPress, proc_keypress, '%k %K'
       nil
-    end
-
-    def f_frame_inner
-      @f_frame_inner_value ||= begin
-        f = ::Tk::Tile::Frame.new f_content
-        f.height 100
-        f.width 200
-        f.grid
-      end
     end
 
     def proc_keypress

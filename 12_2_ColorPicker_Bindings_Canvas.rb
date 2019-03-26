@@ -63,20 +63,7 @@ module ::ColorPicker
 end
 
 module ::ColorPicker
-  module Graphical
-    extend GraphicalHelper
-    extend self
-
-    def main
-      f_content.padding '3 3 3 3'
-      weights_column_and_row_set_up
-      event_bindings_set_up
-      color_initial_set
-      ::Tk.mainloop
-      nil
-    end
-
-    private
+  module GraphicalObjects
 
     def ca_canvas
       @ca_canvas_value ||= begin
@@ -106,16 +93,37 @@ module ::ColorPicker
       end
     end
 
-    def color_initial_set
-      proc_color_set.call :black
-      nil
-    end
+    private
 
     def color_picker_create(y_box, color)
       options = { fill: color }
       x_box = 10, 30
       box = x_box.zip(y_box).flatten
       ::TkcRectangle.new ca_canvas, *box, options
+    end
+  end
+end
+
+module ::ColorPicker
+  module Graphical
+    extend GraphicalHelper
+    extend GraphicalObjects
+    extend self
+
+    def main
+      f_content.padding '3 3 3 3'
+      weights_column_and_row_set_up
+      event_bindings_set_up
+      color_initial_set
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
+    def color_initial_set
+      proc_color_set.call :black
+      nil
     end
 
     def event_bindings_set_up

@@ -35,19 +35,7 @@ module ::NameUnicode
 end
 
 module ::NameUnicode
-  module Graphical
-    extend GraphicalHelper
-    extend self
-
-    def main
-      v_name.value = 'привет'
-# Set up cell behavior:
-      column_1_set_up
-      ::Tk.mainloop
-      nil
-    end
-
-    private
+  module GraphicalObjects
 
     def b_submit
       @b_submit_value ||= begin
@@ -55,13 +43,6 @@ module ::NameUnicode
         b.command proc_name_print
         b.text 'Submit'
       end
-    end
-
-    def column_1_set_up
-      e_name.   grid column: 1, row: 1
-      b_submit. grid column: 1, row: 2
-      l_reflect.grid column: 1, row: 3
-      nil
     end
 
     def e_name
@@ -78,6 +59,39 @@ module ::NameUnicode
       end
     end
 
+    def v_name
+      @v_name_value ||= ::TkVariable.new
+    end
+
+    def v_reflect
+      @v_reflect_value ||= ::TkVariable.new
+    end
+  end
+end
+
+module ::NameUnicode
+  module Graphical
+    extend GraphicalHelper
+    extend GraphicalObjects
+    extend self
+
+    def main
+      v_name.value = 'привет'
+# Set up cell behavior:
+      column_1_set_up
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
+    def column_1_set_up
+      e_name.   grid column: 1, row: 1
+      b_submit. grid column: 1, row: 2
+      l_reflect.grid column: 1, row: 3
+      nil
+    end
+
     def proc_name_print
       @proc_name_print_value ||= ::Kernel.lambda do
         value = v_name.value
@@ -88,14 +102,6 @@ module ::NameUnicode
         puts value
         nil
       end
-    end
-
-    def v_name
-      @v_name_value ||= ::TkVariable.new
-    end
-
-    def v_reflect
-      @v_reflect_value ||= ::TkVariable.new
     end
   end
 end

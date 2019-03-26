@@ -40,8 +40,21 @@ module ::EventBindings
 end
 
 module ::EventBindings
+  module GraphicalObjects
+
+    def l_label
+      @l_label_value ||= begin
+        l = ::Tk::Tile::Label.new f_content
+        l.grid
+      end
+    end
+  end
+end
+
+module ::EventBindings
   module Graphical
     extend GraphicalHelper
+    extend GraphicalObjects
     extend self
 
     def main
@@ -54,13 +67,6 @@ module ::EventBindings
     end
 
     private
-
-    def l_label
-      @l_label_value ||= begin
-        l = ::Tk::Tile::Label.new f_content
-        l.grid
-      end
-    end
 
     def label_bind
       label_bind_drag

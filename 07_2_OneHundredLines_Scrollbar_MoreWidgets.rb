@@ -47,21 +47,7 @@ module ::OneHundredLines
 end
 
 module ::OneHundredLines
-  module Graphical
-    extend GraphicalHelper
-    extend self
-
-    def main
-      f_content.padding '3 3 3 3'
-      weights_column_and_row_set_up
-      si_sizegrip
-      l_status_message
-      listbox_lines_insert
-      ::Tk.mainloop
-      nil
-    end
-
-    private
+  module GraphicalObjects
 
     def l_status_message
       @l_status_message_value ||= begin
@@ -82,13 +68,6 @@ module ::OneHundredLines
       end
     end
 
-    def listbox_lines_insert
-      100.times.each do |i|
-        li_listbox.insert :end, "Line #{i + 1} of 100"
-      end
-      nil
-    end
-
     def scr_scrollbar
       @scr_scrollbar_value ||= begin
         proc_view = proc {|*args| li_listbox.yview(*args)}
@@ -97,6 +76,33 @@ module ::OneHundredLines
         s.orient :vertical
         s.grid column: 1, row: 0, sticky: :ns
       end
+    end
+  end
+end
+
+module ::OneHundredLines
+  module Graphical
+    extend GraphicalHelper
+    extend GraphicalObjects
+    extend self
+
+    def main
+      f_content.padding '3 3 3 3'
+      weights_column_and_row_set_up
+      si_sizegrip
+      l_status_message
+      listbox_lines_insert
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
+    def listbox_lines_insert
+      100.times.each do |i|
+        li_listbox.insert :end, "Line #{i + 1} of 100"
+      end
+      nil
     end
 
     def weights_column_and_row_set_up

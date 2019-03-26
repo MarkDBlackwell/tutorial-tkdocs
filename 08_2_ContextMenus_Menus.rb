@@ -54,8 +54,23 @@ module ::ContextMenus
 end
 
 module ::ContextMenus
+  module GraphicalObjects
+
+    def f_frame_inner
+      @f_frame_inner_value ||= begin
+        f = ::Tk::Tile::Frame.new f_content
+        f.height 100
+        f.width 200
+        f.grid
+      end
+    end
+  end
+end
+
+module ::ContextMenus
   module Graphical
     extend GraphicalHelper
+    extend GraphicalObjects
     extend self
 
     def main
@@ -90,15 +105,6 @@ module ::ContextMenus
         me_context_menu.add :command, label: item, command: proc_item
       end
       nil
-    end
-
-    def f_frame_inner
-      @f_frame_inner_value ||= begin
-        f = ::Tk::Tile::Frame.new f_content
-        f.height 100
-        f.width 200
-        f.grid
-      end
     end
 
     def proc_item

@@ -103,10 +103,105 @@ module ::GiftsToCountries
 end
 
 module ::GiftsToCountries
+  module GraphicalObjects
+
+    def b_send
+      @b_send_value ||= begin
+        b = ::Tk::Tile::Button.new f_content
+        b.command proc_gift_send # Callback.
+        b.default :active
+        b.text 'Send Gift'
+      end
+    end
+
+    def l_send_label
+      @l_send_label_value ||= begin
+        l = ::Tk::Tile::Label.new f_content
+        l.text 'Send to country\'s leader:'
+      end
+    end
+
+    def l_sent_label
+      @l_sent_label_value ||= begin
+        l = ::Tk::Tile::Label.new f_content
+        l.anchor :center
+        l.textvariable v_sent
+      end
+    end
+
+    def l_status_label
+      @l_status_label_value ||= begin
+        l = ::Tk::Tile::Label.new f_content
+        l.anchor :w
+        l.textvariable v_status
+      end
+    end
+
+    def li_countries
+      @li_countries_value ||= begin
+        l = ::TkListbox.new f_content
+        l.height 5
+        l.listvariable v_country_names
+      end
+    end
+
+    def r_gift_0
+      @r_gift_0_value ||= begin
+        index = 0
+        radiobutton_set_up index
+      end
+    end
+
+    def r_gift_1
+      @r_gift_1_value ||= begin
+        index = 1
+        radiobutton_set_up index
+      end
+    end
+
+    def r_gift_2
+      @r_gift_2_value ||= begin
+        index = 2
+        radiobutton_set_up index
+      end
+    end
+
+# Create and initialize the linked variables we'll need in the interface:
+
+    def v_country_names
+      @v_country_names_value ||= ::TkVariable.new country_names
+    end
+
+    def v_gift
+      @v_gift_value ||= ::TkVariable.new :card
+    end
+
+    def v_sent
+      @v_sent_value ||= ::TkVariable.new ''
+    end
+
+    def v_status
+      @v_status_value ||= ::TkVariable.new ''
+    end
+
+    private
+
+    def radiobutton_set_up(index)
+      key = gifts.keys.at index
+      r = ::Tk::Tile::Radiobutton.new f_content
+      r.text gifts.fetch key
+      r.value key
+      r.variable v_gift
+    end
+  end
+end
+
+module ::GiftsToCountries
   module Graphical
     extend Country
     extend Gift
     extend GraphicalHelper
+    extend GraphicalObjects
     extend self
 
     def main
@@ -126,15 +221,6 @@ module ::GiftsToCountries
     end
 
     private
-
-    def b_send
-      @b_send_value ||= begin
-        b = ::Tk::Tile::Button.new f_content
-        b.command proc_gift_send # Callback.
-        b.default :active
-        b.text 'Send Gift'
-      end
-    end
 
     def colorize_alternating_lines_of_the_listbox
       country_codes.length.times.each_slice(2).map(&:first).each do |i|
@@ -192,37 +278,6 @@ module ::GiftsToCountries
       column_2_set_up
     end
 
-    def l_send_label
-      @l_send_label_value ||= begin
-        l = ::Tk::Tile::Label.new f_content
-        l.text 'Send to country\'s leader:'
-      end
-    end
-
-    def l_sent_label
-      @l_sent_label_value ||= begin
-        l = ::Tk::Tile::Label.new f_content
-        l.anchor :center
-        l.textvariable v_sent
-      end
-    end
-
-    def l_status_label
-      @l_status_label_value ||= begin
-        l = ::Tk::Tile::Label.new f_content
-        l.anchor :w
-        l.textvariable v_status
-      end
-    end
-
-    def li_countries
-      @li_countries_value ||= begin
-        l = ::TkListbox.new f_content
-        l.height 5
-        l.listvariable v_country_names
-      end
-    end
-
     def population_show(index)
       i = index
       a = country_names.at i
@@ -267,53 +322,6 @@ module ::GiftsToCountries
         feedback_provide i
         nil
       end
-    end
-
-    def r_gift_0
-      @r_gift_0_value ||= begin
-        index = 0
-        radiobutton_set_up index
-      end
-    end
-
-    def r_gift_1
-      @r_gift_1_value ||= begin
-        index = 1
-        radiobutton_set_up index
-      end
-    end
-
-    def r_gift_2
-      @r_gift_2_value ||= begin
-        index = 2
-        radiobutton_set_up index
-      end
-    end
-
-    def radiobutton_set_up(index)
-      key = gifts.keys.at index
-      r = ::Tk::Tile::Radiobutton.new f_content
-      r.text gifts.fetch key
-      r.value key
-      r.variable v_gift
-    end
-
-# Create and initialize the linked variables we'll need in the interface:
-
-    def v_country_names
-      @v_country_names_value ||= ::TkVariable.new country_names
-    end
-
-    def v_gift
-      @v_gift_value ||= ::TkVariable.new :card
-    end
-
-    def v_sent
-      @v_sent_value ||= ::TkVariable.new ''
-    end
-
-    def v_status
-      @v_status_value ||= ::TkVariable.new ''
     end
 
     def weights_column_and_row_set_up

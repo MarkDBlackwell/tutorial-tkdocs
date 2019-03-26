@@ -76,8 +76,23 @@ module ::AlertAndConfirmationDialogs
 end
 
 module ::AlertAndConfirmationDialogs
+  module GraphicalObjects
+
+    def f_frame_inner
+      @f_frame_inner_value ||= begin
+        f = ::Tk::Tile::Frame.new f_content
+        f.height 100
+        f.width 200
+        f.grid
+      end
+    end
+  end
+end
+
+module ::AlertAndConfirmationDialogs
   module Graphical
     extend GraphicalHelper
+    extend GraphicalObjects
     extend self
 
     def main
@@ -90,15 +105,6 @@ module ::AlertAndConfirmationDialogs
     end
 
     private
-
-    def f_frame_inner
-      @f_frame_inner_value ||= begin
-        f = ::Tk::Tile::Frame.new f_content
-        f.height 100
-        f.width 200
-        f.grid
-      end
-    end
 
     def proc_about
       @proc_about_value ||= ::Kernel.lambda do

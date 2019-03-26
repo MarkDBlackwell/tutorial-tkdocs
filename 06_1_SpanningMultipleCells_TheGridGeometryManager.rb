@@ -32,22 +32,7 @@ module ::SpanningMultipleCells
 end
 
 module ::SpanningMultipleCells
-  module Graphical
-    extend GraphicalHelper
-    extend self
-
-    def main
-# Set up cell behavior:
-      column_0_set_up
-      column_1_set_up
-      column_2_set_up
-      column_3_set_up
-      column_4_set_up
-      ::Tk.mainloop
-      nil
-    end
-
-    private
+  module GraphicalObjects
 
     def b_cancel
       @b_cancel_value ||= begin
@@ -93,6 +78,48 @@ module ::SpanningMultipleCells
       end
     end
 
+    def e_name
+      @e_name_value ||= ::Tk::Tile::Entry.new f_content
+    end
+
+    def f_frame_inner
+      @f_frame_inner_value ||= begin
+        f = ::Tk::Tile::Frame.new f_content
+        f.borderwidth 5
+        f.height 100
+        f.relief :sunken
+        f.width 200
+      end
+    end
+
+    def l_label_name
+      @l_label_name_value ||= begin
+        l = ::Tk::Tile::Label.new f_content
+        l.text 'Name'
+      end
+    end
+  end
+end
+
+module ::SpanningMultipleCells
+  module Graphical
+    extend GraphicalHelper
+    extend GraphicalObjects
+    extend self
+
+    def main
+# Set up cell behavior:
+      column_0_set_up
+      column_1_set_up
+      column_2_set_up
+      column_3_set_up
+      column_4_set_up
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
     def checkbutton_value_when_selected
       1
     end
@@ -123,27 +150,6 @@ module ::SpanningMultipleCells
     def column_4_set_up
       b_cancel     .grid column: 4, row: 3
       nil
-    end
-
-    def e_name
-      @e_name_value ||= ::Tk::Tile::Entry.new f_content
-    end
-
-    def f_frame_inner
-      @f_frame_inner_value ||= begin
-        f = ::Tk::Tile::Frame.new f_content
-        f.borderwidth 5
-        f.height 100
-        f.relief :sunken
-        f.width 200
-      end
-    end
-
-    def l_label_name
-      @l_label_name_value ||= begin
-        l = ::Tk::Tile::Label.new f_content
-        l.text 'Name'
-      end
     end
   end
 end

@@ -40,8 +40,25 @@ module ::LoggingWindow
 end
 
 module ::LoggingWindow
+  module GraphicalObjects
+
+    def t_log
+      @t_log_value ||= begin
+        t = ::TkText.new f_content
+        t.height 24
+        t.state :disabled
+        t.width 80
+        t.wrap :none
+        t.grid
+      end
+    end
+  end
+end
+
+module ::LoggingWindow
   module Graphical
     extend GraphicalHelper
+    extend GraphicalObjects
     extend self
 
     def main
@@ -82,17 +99,6 @@ module ::LoggingWindow
       t_log.insert :end, message
       t_log[:state] = :disabled
       nil
-    end
-
-    def t_log
-      @t_log_value ||= begin
-        t = ::TkText.new f_content
-        t.height 24
-        t.state :disabled
-        t.width 80
-        t.wrap :none
-        t.grid
-      end
     end
 
     def weights_column_and_row_set_up

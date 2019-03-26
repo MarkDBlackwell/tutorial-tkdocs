@@ -40,20 +40,7 @@ module ::StackingOrder
 end
 
 module ::StackingOrder
-  module Graphical
-    extend GraphicalHelper
-    extend self
-
-    def main
-      f_content.padding '3 0 3 0'
-      weights_column_and_row_set_up
-      l_bigger
-      raise_later
-      ::Tk.mainloop
-      nil
-    end
-
-    private
+  module GraphicalObjects
 
     def l_bigger
       @l_bigger_value ||= begin
@@ -70,6 +57,25 @@ module ::StackingOrder
         l.grid column: 0, row: 0, sticky: :w
       end
     end
+  end
+end
+
+module ::StackingOrder
+  module Graphical
+    extend GraphicalHelper
+    extend GraphicalObjects
+    extend self
+
+    def main
+      f_content.padding '3 0 3 0'
+      weights_column_and_row_set_up
+      l_bigger
+      raise_later
+      ::Tk.mainloop
+      nil
+    end
+
+    private
 
     def proc_raise
       @proc_raise_value ||= ::Kernel.lambda do

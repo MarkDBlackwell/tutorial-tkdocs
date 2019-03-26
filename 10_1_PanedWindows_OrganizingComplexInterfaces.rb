@@ -40,27 +40,7 @@ module ::PanedWindows
 end
 
 module ::PanedWindows
-  module Graphical
-    extend GraphicalHelper
-    extend self
-
-    def main
-      f_content.padding '3 3 3 3'
-      weights_column_and_row_set_up
-      add_frames_to_paned_windows
-      ::Tk.mainloop
-      nil
-    end
-
-    private
-
-    def add_frames_to_paned_windows
-      pa_horizontal.add la_horizontal_1
-      pa_horizontal.add la_horizontal_2
-      pa_vertical.  add la_vertical_3
-      pa_vertical.  add la_vertical_4
-      nil
-    end
+  module GraphicalObjects
 
 # Create labelframes, into which widgets can be gridded:
 
@@ -94,11 +74,6 @@ module ::PanedWindows
       end
     end
 
-    def labelframe_set_up(orientation)
-      l = ::Tk::Tile::Labelframe.new orientation
-      l.height 100
-    end
-
     def pa_horizontal
       @pa_horizontal_value ||= begin
         p = ::Tk::Tile::Paned.new f_content, orient: :horizontal
@@ -111,6 +86,39 @@ module ::PanedWindows
         p = ::Tk::Tile::Paned.new f_content, orient: :vertical
         p.grid column: 0, row: 1, sticky: :wnes
       end
+    end
+
+    private
+
+    def labelframe_set_up(orientation)
+      l = ::Tk::Tile::Labelframe.new orientation
+      l.height 100
+    end
+  end
+end
+
+module ::PanedWindows
+  module Graphical
+    extend GraphicalHelper
+    extend GraphicalObjects
+    extend self
+
+    def main
+      f_content.padding '3 3 3 3'
+      weights_column_and_row_set_up
+      add_frames_to_paned_windows
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
+    def add_frames_to_paned_windows
+      pa_horizontal.add la_horizontal_1
+      pa_horizontal.add la_horizontal_2
+      pa_vertical.  add la_vertical_3
+      pa_vertical.  add la_vertical_4
+      nil
     end
 
     def weights_column_and_row_set_up

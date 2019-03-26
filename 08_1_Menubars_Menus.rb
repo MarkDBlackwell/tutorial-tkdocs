@@ -54,8 +54,30 @@ module ::Menubars
 end
 
 module ::Menubars
+  module GraphicalObjects
+
+    def me_edit
+      @me_edit_value ||= ::TkMenu.new me_menubar
+    end
+
+    def me_file
+      @me_file_value ||= ::TkMenu.new me_menubar
+    end
+
+    def v_check
+      @ch_check_value ||= ::TkVariable.new
+    end
+
+    def v_radio
+      @v_radio_value ||= ::TkVariable.new
+    end
+  end
+end
+
+module ::Menubars
   module Graphical
     extend GraphicalHelper
+    extend GraphicalObjects
     extend self
 
     def main
@@ -67,14 +89,6 @@ module ::Menubars
     end
 
     private
-
-    def me_edit
-      @me_edit_value ||= ::TkMenu.new me_menubar
-    end
-
-    def me_file
-      @me_file_value ||= ::TkMenu.new me_menubar
-    end
 
     def menu_edit_items_add
       me_edit.add :command,     label: 'Three',   command: proc_three,      underline: 0
@@ -177,14 +191,6 @@ module ::Menubars
         print "proc_two invoked.\n"
         nil
       end
-    end
-
-    def v_check
-      @ch_check_value ||= ::TkVariable.new
-    end
-
-    def v_radio
-      @v_radio_value ||= ::TkVariable.new
     end
 
     def weights_column_and_row_set_up

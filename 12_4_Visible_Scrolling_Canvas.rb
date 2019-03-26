@@ -63,20 +63,7 @@ module ::Visible
 end
 
 module ::Visible
-  module Graphical
-    extend GraphicalHelper
-    extend self
-
-    def main
-      weights_column_and_row_set_up
-      scrollbar_set_up
-      event_bindings_set_up
-      color_initial_set
-      ::Tk.mainloop
-      nil
-    end
-
-    private
+  module GraphicalObjects
 
     def ca_canvas
       @ca_canvas_value ||= begin
@@ -108,18 +95,47 @@ module ::Visible
       end
     end
 
-    def color_initial_set
-      proc_color_set.call :black
-      border_width = 7
-      ca_canvas.itemconfigure :palette, width: border_width
-      nil
+    def scr_vertical
+      @scr_vertical_value ||= begin
+        s = ::Tk::Tile::Scrollbar.new f_content
+        s.orient :vertical
+        s.grid column: 1, row: 0, sticky: :ns
+      end
     end
+
+    private
 
     def color_picker_create(y_box, color, tag_list)
       options = { fill: color, tags: "palette #{tag_list}" }
       x_box = 10, 30
       box = x_box.zip(y_box).flatten
       ::TkcRectangle.new ca_canvas, *box, options
+    end
+  end
+end
+
+module ::Visible
+  module Graphical
+    extend GraphicalHelper
+    extend GraphicalObjects
+    extend self
+
+    def main
+      weights_column_and_row_set_up
+      scrollbar_set_up
+      event_bindings_set_up
+      color_initial_set
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
+    def color_initial_set
+      proc_color_set.call :black
+      border_width = 7
+      ca_canvas.itemconfigure :palette, width: border_width
+      nil
     end
 
     def event_bindings_set_up
@@ -192,14 +208,6 @@ module ::Visible
         s = ::Tk::Tile::Scrollbar.new f_content
         s.orient :horizontal
         s.grid column: 0, row: 1, sticky: :we
-      end
-    end
-
-    def scr_vertical
-      @scr_vertical_value ||= begin
-        s = ::Tk::Tile::Scrollbar.new f_content
-        s.orient :vertical
-        s.grid column: 1, row: 0, sticky: :ns
       end
     end
 

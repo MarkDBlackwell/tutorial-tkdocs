@@ -48,8 +48,30 @@ module ::FeetToMeters
 end
 
 module ::FeetToMeters
+  module GraphicalObjects
+
+    def e_feet
+      @e_feet_value ||= begin
+        e = ::Tk::Tile::Entry.new f_content
+        e.textvariable v_feet
+        e.width 7
+      end
+    end
+
+    def v_feet
+      @v_feet_value ||= ::TkVariable.new
+    end
+
+    def v_meters
+      @v_meters_value ||= ::TkVariable.new
+    end
+  end
+end
+
+module ::FeetToMeters
   module Graphical
     extend GraphicalHelper
+    extend GraphicalObjects
     extend self
 
     def main
@@ -121,14 +143,6 @@ module ::FeetToMeters
       nil
     end
 
-    def e_feet
-      @e_feet_value ||= begin
-        e = ::Tk::Tile::Entry.new f_content
-        e.textvariable v_feet
-        e.width 7
-      end
-    end
-
     def pad_grid_boxes
       ::TkWinfo.children(f_content).each do |widget|
 # Pad each grid box:
@@ -157,14 +171,6 @@ module ::FeetToMeters
         proc_calculate_and_focus.call
       end
       nil
-    end
-
-    def v_feet
-      @v_feet_value ||= ::TkVariable.new
-    end
-
-    def v_meters
-      @v_meters_value ||= ::TkVariable.new
     end
 
     def weights_column_and_row_set_up

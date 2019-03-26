@@ -40,20 +40,7 @@ module ::Notebook
 end
 
 module ::Notebook
-  module Graphical
-    extend GraphicalHelper
-    extend self
-
-    def main
-      f_content.padding '3 3 3 3'
-      weights_column_and_row_set_up
-      tabs_add
-      labels_add
-      ::Tk.mainloop
-      nil
-    end
-
-    private
+  module GraphicalObjects
 
 # For each tab, create a frame, into which widgets can be gridded:
 
@@ -93,13 +80,6 @@ module ::Notebook
       end
     end
 
-    def labels_add
-      l_label_1
-      l_label_2
-      l_label_3
-      nil
-    end
-
     def n_notebook
       @n_notebook_value ||= begin
         n = ::Tk::Tile::Notebook.new f_content
@@ -107,6 +87,32 @@ module ::Notebook
         n.width 200
         n.grid sticky: :wnes
       end
+    end
+  end
+end
+
+module ::Notebook
+  module Graphical
+    extend GraphicalHelper
+    extend GraphicalObjects
+    extend self
+
+    def main
+      f_content.padding '3 3 3 3'
+      weights_column_and_row_set_up
+      tabs_add
+      labels_add
+      ::Tk.mainloop
+      nil
+    end
+
+    private
+
+    def labels_add
+      l_label_1
+      l_label_2
+      l_label_3
+      nil
     end
 
     def tabs_add

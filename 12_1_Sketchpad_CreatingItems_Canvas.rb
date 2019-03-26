@@ -55,8 +55,21 @@ module ::Sketchpad
 end
 
 module ::Sketchpad
+  module GraphicalObjects
+
+    def ca_canvas
+      @ca_canvas_value ||= begin
+        c = ::TkCanvas.new f_content
+        c.grid sticky: :wnes
+      end
+    end
+  end
+end
+
+module ::Sketchpad
   module Graphical
     extend GraphicalHelper
+    extend GraphicalObjects
     extend self
 
     def main
@@ -68,13 +81,6 @@ module ::Sketchpad
     end
 
     private
-
-    def ca_canvas
-      @ca_canvas_value ||= begin
-        c = ::TkCanvas.new f_content
-        c.grid sticky: :wnes
-      end
-    end
 
     def event_bindings_set_up
       event_bindings_set_up_canvas
