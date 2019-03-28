@@ -11,11 +11,7 @@ module ::ContinuousUpdate
 
     def main
       stream # Initialize output file.
-      filename = 'con:' # If not on Windows, change this.
-      mode = "r:#{encoding_current}:#{encoding_current}"
-      ::File.open filename, mode do |f|
-        transfer f
-      end
+      transfer
       nil
     end
 
@@ -26,15 +22,22 @@ module ::ContinuousUpdate
 #  http://stackoverflow.com/questions/388490/how-to-use-unicode-characters-in-windows-command-line
 #  http://utf8everywhere.org/
 #  http://www.honeybadger.io/blog/data-and-end-in-ruby/
-
       DATA.each_line do |line|
         stream_write line
       end
       nil
     end
 
-    def console_read(f)
-      f.readline.chomp
+    def console_read
+      filehandle.readline.chomp
+    end
+
+    def filehandle
+      @filehandle_value ||= begin
+        filename = 'con:' # If not on Windows, change this.
+        mode = "r:#{encoding_current}:#{encoding_current}"
+        ::File.open filename, mode
+      end
     end
 
     def stream_mode
@@ -50,13 +53,23 @@ module ::ContinuousUpdate
       nil
     end
 
-    def transfer(f)
-      avoid_unicode_problem_with_windows_console_keyboard
-      s = console_read f
+    def transfer
+      transfer_unicode
+      transfer_from_console
+      nil
+    end
+
+    def transfer_from_console
+      s = console_read
       until 'stop' == s
         stream_write s
-        s = console_read f
+        s = console_read
       end
+      nil
+    end
+
+    def transfer_unicode
+      avoid_unicode_problem_with_windows_console_keyboard
       nil
     end
   end
