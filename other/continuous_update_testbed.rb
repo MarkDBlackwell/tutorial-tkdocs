@@ -23,7 +23,9 @@ module ::ContinuousUpdate
 
     def avoid_unicode_problem_with_windows_console_keyboard
 # See:
-#  https://www.honeybadger.io/blog/data-and-end-in-ruby/
+#  http://stackoverflow.com/questions/388490/how-to-use-unicode-characters-in-windows-command-line
+#  http://utf8everywhere.org/
+#  http://www.honeybadger.io/blog/data-and-end-in-ruby/
 
       DATA.each_line do |line|
         stream_write line
@@ -42,7 +44,7 @@ module ::ContinuousUpdate
     def stream_write(s)
       stream.puts s
 # See:
-#   https://stackoverflow.com/questions/6701103/understanding-ruby-and-os-i-o-buffering
+#   http://stackoverflow.com/questions/6701103/understanding-ruby-and-os-i-o-buffering
 
       stream.flush
       nil
@@ -61,5 +63,6 @@ module ::ContinuousUpdate
 end
 
 ::ContinuousUpdate::Testbed.main
+# The following is "Hello" in Russian.
 __END__
-привет
+Привет

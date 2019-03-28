@@ -76,7 +76,7 @@ module ::NameUnicode
     extend self
 
     def main
-      v_name.value = 'привет'
+      v_name.value = 'Привет' # This is "Hello" in Russian.
 # Set up cell behavior:
       column_1_set_up
       ::Tk.mainloop
