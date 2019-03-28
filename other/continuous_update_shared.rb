@@ -21,7 +21,9 @@ module ::ContinuousUpdate
     private
 
     def stream_filename
-      '../out/continuously-update-stream.txt'
+      a = %w[  ..  out  continuously-update-stream.txt  ]
+      path_relative = ::File.join(*a)
+      ::File.expand_path path_relative, __dir__
     end
   end
 end
