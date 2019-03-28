@@ -96,7 +96,7 @@ module ::GiftsToCountries
     private
 
     def tell_tk_which_encoding_to_use
-      Tk::Encoding.encoding = ''.encoding
+      ::Tk::Encoding.encoding = ''.encoding
       nil
     end
   end
