@@ -47,10 +47,7 @@ module ::ContinuousUpdate
       raw = stream.getc
       unless raw.nil?
         s = raw.chomp
-        internal = s.encoding
-        unless s.empty?
-          v_accumulator.value += s
-        end
+        v_accumulator.value += s unless s.empty?
       end
       nil
     end
