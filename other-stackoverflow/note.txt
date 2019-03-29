@@ -1,2 +1,0 @@
-For this StackOverflow question:
-  http://stackoverflow.com/questions/22615489/how-to-continuously-update-a-graphics-window-in-ruby-using-tk

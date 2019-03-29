@@ -2,6 +2,9 @@
 
 # Copyright (C) 2019 Mark D. Blackwell.
 
+# See:
+#   http://stackoverflow.com/questions/22615489/how-to-continuously-update-a-graphics-window-in-ruby-using-tk
+
 require 'tk'
 require 'tkextlib/tile'
 require_relative 'continuous_update_shared'
