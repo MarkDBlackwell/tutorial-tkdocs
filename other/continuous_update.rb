@@ -16,12 +16,12 @@ module ::ContinuousUpdate
     extend self
 
     def main
-      f_content.padding '3 3 3 3'
+      f_content.padding '4 4 4 4'
       l_clock
       l_accumulator
       v_clock.value = '1'
-      proc_clock_tick.call
-      proc_stream_read.call
+      lambda_clock_tick.call
+      lambda_stream_read.call
       ::Tk.mainloop
       nil
     end
@@ -30,12 +30,12 @@ module ::ContinuousUpdate
 
     def clock_tick_schedule_later
       milliseconds = 1000
-      ::Tk.after milliseconds, proc_clock_tick
+      ::Tk.after milliseconds, lambda_clock_tick
       nil
     end
 
-    def proc_clock_tick
-      @proc_clock_tick_value ||= ::Kernel.lambda do
+    def lambda_clock_tick
+      @lambda_clock_tick_value ||= ::Kernel.lambda do
         time_new = 1 + v_clock.value.to_i
         v_clock.value = time_new.to_s
         clock_tick_schedule_later
@@ -43,8 +43,8 @@ module ::ContinuousUpdate
       end
     end
 
-    def proc_stream_read
-      @proc_stream_read_value ||= ::Kernel.lambda do
+    def lambda_stream_read
+      @lambda_stream_read_value ||= ::Kernel.lambda do
         stream_read
         read_schedule_later
         nil
@@ -53,7 +53,7 @@ module ::ContinuousUpdate
 
     def read_schedule_later
       milliseconds = 100
-      ::Tk.after milliseconds, proc_stream_read
+      ::Tk.after milliseconds, lambda_stream_read
       nil
     end
 

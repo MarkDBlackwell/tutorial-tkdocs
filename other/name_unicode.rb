@@ -40,7 +40,7 @@ module ::NameUnicode
     def b_submit
       @b_submit_value ||= begin
         b = ::Tk::Tile::Button.new f_content
-        b.command proc_name_print
+        b.command lambda_name_print
         b.text 'Submit'
       end
     end
@@ -76,7 +76,7 @@ module ::NameUnicode
     extend self
 
     def main
-      v_name.value = 'Привет' # This is "Hello" in Russian.
+      v_name.value = 'γεια σας' # This is "Hello" in Greek.
 # Set up cell behavior:
       column_1_set_up
       ::Tk.mainloop
@@ -92,8 +92,8 @@ module ::NameUnicode
       nil
     end
 
-    def proc_name_print
-      @proc_name_print_value ||= ::Kernel.lambda do
+    def lambda_name_print
+      @lambda_name_print_value ||= ::Kernel.lambda do
         value = v_name.value
         v_reflect.value = value
         puts value.encoding

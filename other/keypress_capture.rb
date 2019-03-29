@@ -66,13 +66,13 @@ module ::KeypressCapture
     private
 
     def events_bind
-      root.bind :KeyPress, proc_keypress, '%k %K'
+      root.bind :KeyPress, lambda_keypress, '%k %K'
       nil
     end
 
-    def proc_keypress
-      @proc_keypress_value ||= ::Kernel.lambda do |key_code, key_sym|
-        print "proc_keypress invoked with keycode #{key_code} and keysym #{key_sym}.\n"
+    def lambda_keypress
+      @lambda_keypress_value ||= ::Kernel.lambda do |key_code, key_sym|
+        print "lambda_keypress invoked with keycode #{key_code} and keysym #{key_sym}.\n"
         nil
       end
     end
