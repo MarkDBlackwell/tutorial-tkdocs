@@ -17,8 +17,7 @@ module ::ContinuousUpdate
 
     def main
       f_content.padding '4 4 4 4'
-      l_clock
-      l_accumulator
+      l_accumulator # Keep before reading the stream.
       v_clock.value = '1'
       lambda_clock_tick.call
       lambda_stream_read.call

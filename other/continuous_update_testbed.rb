@@ -36,6 +36,7 @@ module ::ContinuousUpdate
     def stream_write(s)
       stream.puts s
 # See:
+#   http://bugs.ruby-lang.org/issues/9153
 #   http://stackoverflow.com/questions/6701103/understanding-ruby-and-os-i-o-buffering
 
       stream.flush
