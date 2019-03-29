@@ -17,27 +17,16 @@ module ::ContinuousUpdate
 
     private
 
-    def avoid_unicode_problem_with_windows_console_keyboard
-# See:
-#  http://stackoverflow.com/questions/388490/how-to-use-unicode-characters-in-windows-command-line
-#  http://utf8everywhere.org/
-#  http://www.honeybadger.io/blog/data-and-end-in-ruby/
-      DATA.each_line do |line|
-        stream_write line
-      end
-      nil
-    end
-
-    def console_read
-      filehandle.readline.chomp
-    end
-
-    def filehandle
-      @filehandle_value ||= begin
+    def console_filehandle
+      @console_filehandle_value ||= begin
         filename = 'con:' # If not on Windows, change this.
         mode = "r:#{encoding_current}:#{encoding_current}"
         ::File.open filename, mode
       end
+    end
+
+    def console_read
+      console_filehandle.readline.chomp
     end
 
     def stream_mode
@@ -55,27 +44,34 @@ module ::ContinuousUpdate
 
     def transfer
       transfer_unicode
-      transfer_from_console
+      transfer_ascii_from_console
       nil
     end
 
-    def transfer_from_console
-      s = console_read
-      until 'stop' == s
-        stream_write s
-        s = console_read
+    def transfer_ascii_from_console
+      line = console_read
+      until 'stop' == line
+        stream_write line
+        line = console_read
       end
       nil
     end
 
     def transfer_unicode
-      avoid_unicode_problem_with_windows_console_keyboard
+# Avoid Unicode problems on Windows console keyboard.
+# See:
+#  http://stackoverflow.com/questions/388490/how-to-use-unicode-characters-in-windows-command-line
+#  http://utf8everywhere.org/
+#  http://www.honeybadger.io/blog/data-and-end-in-ruby/
+
+      DATA.each_line {|e| stream_write e}
       nil
     end
   end
 end
 
 ::ContinuousUpdate::Testbed.main
-# The following is "Hello" in Russian.
+
+# The following is "Hello" in Greek:
 __END__
-Привет
+γεια σας

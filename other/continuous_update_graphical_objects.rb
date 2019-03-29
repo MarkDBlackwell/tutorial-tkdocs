@@ -10,7 +10,7 @@ module ::ContinuousUpdate
 
     def l_accumulator
       @l_accumulator_value ||= begin
-        pixels = 500
+        pixels = 200
         l = ::Tk::Tile::Label.new f_content
         l.textvariable v_accumulator
         l.wraplength pixels
