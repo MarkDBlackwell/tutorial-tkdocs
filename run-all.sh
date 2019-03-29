@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (C) 2018 Mark D. Blackwell.
+# Copyright (C) 2019 Mark D. Blackwell.
 #   All rights reserved.
 #   This program is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -24,6 +24,3 @@ ruby 12_2_ColorPicker_Bindings_Canvas.rb &
 ruby 12_3_Decoration_Tags_Canvas.rb &
 ruby 12_4_Visible_Scrolling_Canvas.rb &
 ruby 13_LoggingWindow_ModifyingTheTextInCode_Text.rb &
-ruby other/error_unknown_option.rb &
-ruby other/keypress_capture.rb &
-ruby other/name_unicode.rb &
