@@ -122,7 +122,7 @@ module ::Decoration
     private
 
     def color_initial_set
-      proc_color_set.call :black
+      lambda_color_set.call :black
       border_width = 7
       ca_canvas.itemconfigure :palette, width: border_width
       nil
@@ -135,16 +135,16 @@ module ::Decoration
     end
 
     def event_bindings_set_up_canvas
-      ca_canvas.bind '1',                proc_segment_start,  '%x %y'
-      ca_canvas.bind 'B1-ButtonRelease', proc_stroke_done
-      ca_canvas.bind 'B1-Motion',        proc_segment_append, '%x %y'
+      ca_canvas.bind '1',                lambda_segment_start,  '%x %y'
+      ca_canvas.bind 'B1-ButtonRelease', lambda_stroke_done
+      ca_canvas.bind 'B1-Motion',        lambda_segment_append, '%x %y'
       nil
     end
 
     def event_bindings_set_up_color_pickers
-      car_color_picker_black.bind '1', proc_color_set, :black
-      car_color_picker_blue. bind '1', proc_color_set, :blue
-      car_color_picker_red.  bind '1', proc_color_set, :red
+      car_color_picker_black.bind '1', lambda_color_set, :black
+      car_color_picker_blue. bind '1', lambda_color_set, :blue
+      car_color_picker_red.  bind '1', lambda_color_set, :red
       nil
     end
 
@@ -156,16 +156,16 @@ module ::Decoration
       nil
     end
 
-    def proc_color_set
-      @proc_color_set_value ||= ::Kernel.lambda do |v|
+    def lambda_color_set
+      @lambda_color_set_value ||= ::Kernel.lambda do |v|
         Color.value = v
         palette_reselect
         nil
       end
     end
 
-    def proc_segment_append
-      @proc_segment_append_value ||= ::Kernel.lambda do |x_end, y_end|
+    def lambda_segment_append
+      @lambda_segment_append_value ||= ::Kernel.lambda do |x_end, y_end|
         segment_width_thicker = 2
         options = { fill: Color.value, width: segment_width_thicker, tags: :currentLine }
         x_start, y_start = Position.value
@@ -175,15 +175,15 @@ module ::Decoration
       end
     end
 
-    def proc_segment_start
-      @proc_segment_start_value ||= ::Kernel.lambda do |x,y|
+    def lambda_segment_start
+      @lambda_segment_start_value ||= ::Kernel.lambda do |x,y|
         Position.set x, y
         nil
       end
     end
 
-    def proc_stroke_done
-      @proc_stroke_done_value ||= ::Kernel.lambda do
+    def lambda_stroke_done
+      @lambda_stroke_done_value ||= ::Kernel.lambda do
         ca_canvas.itemconfigure :currentLine, width: 1
         nil
       end

@@ -106,8 +106,8 @@ module ::AlertAndConfirmationDialogs
 
     private
 
-    def proc_about
-      @proc_about_value ||= ::Kernel.lambda do
+    def lambda_about
+      @lambda_about_value ||= ::Kernel.lambda do
         ::Tk.messageBox message: About.program, detail: About.details
         nil
       end
@@ -115,7 +115,7 @@ module ::AlertAndConfirmationDialogs
 
     def raise_later
       milliseconds = 1000
-      ::Tk.after milliseconds, proc_about
+      ::Tk.after milliseconds, lambda_about
       nil
     end
 

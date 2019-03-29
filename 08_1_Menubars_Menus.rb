@@ -91,8 +91,8 @@ module ::Menubars
     private
 
     def menu_edit_items_add
-      me_edit.add :command,     label: 'Three',   command: proc_three,      underline: 0
-      me_edit.add :command,     label: 'Four',    command: proc_four,       underline: 0
+      me_edit.add :command,     label: 'Three',   command: lambda_three,      underline: 0
+      me_edit.add :command,     label: 'Four',    command: lambda_four,       underline: 0
       nil
     end
 
@@ -105,20 +105,20 @@ module ::Menubars
     end
 
     def menu_file_items_checkbutton_add
-      me_file.add :checkbutton, label: 'Check',   command: proc_check,      underline: 1, variable: v_check, onvalue: 1, offvalue: 0
+      me_file.add :checkbutton, label: 'Check',   command: lambda_check,      underline: 1, variable: v_check, onvalue: 1, offvalue: 0
       nil
     end
 
     def menu_file_items_file_actions_add
-      me_file.add :command,     label: 'New',     command: proc_file_new,   underline: 0
-      me_file.add :command,     label: 'Open...', command: proc_file_open,  underline: 0
-      me_file.add :command,     label: 'Close',   command: proc_file_close, underline: 0
+      me_file.add :command,     label: 'New',     command: lambda_file_new,   underline: 0
+      me_file.add :command,     label: 'Open...', command: lambda_file_open,  underline: 0
+      me_file.add :command,     label: 'Close',   command: lambda_file_close, underline: 0
       nil
     end
 
     def menu_file_items_radiobuttons_add
-      me_file.add :radiobutton, label: 'One',     command: proc_one,        underline: 2, variable: v_radio, value: 1
-      me_file.add :radiobutton, label: 'Two',     command: proc_two,        underline: 0, variable: v_radio, value: 2
+      me_file.add :radiobutton, label: 'One',     command: lambda_one,        underline: 2, variable: v_radio, value: 1
+      me_file.add :radiobutton, label: 'Two',     command: lambda_two,        underline: 0, variable: v_radio, value: 2
       nil
     end
 
@@ -137,58 +137,58 @@ module ::Menubars
       nil
     end
 
-    def proc_check
-      @proc_check_value ||= ::Kernel.lambda do
-        print "proc_check invoked.\n"
+    def lambda_check
+      @lambda_check_value ||= ::Kernel.lambda do
+        print "lambda_check invoked.\n"
         nil
       end
     end
 
-    def proc_file_close
-      @proc_file_close_value ||= ::Kernel.lambda do
-        print "proc_file_close invoked.\n"
+    def lambda_file_close
+      @lambda_file_close_value ||= ::Kernel.lambda do
+        print "lambda_file_close invoked.\n"
         nil
       end
     end
 
-    def proc_file_new
-      @proc_file_new_value ||= ::Kernel.lambda do
-        print "proc_file_new invoked.\n"
+    def lambda_file_new
+      @lambda_file_new_value ||= ::Kernel.lambda do
+        print "lambda_file_new invoked.\n"
         nil
       end
     end
 
-    def proc_file_open
-      @proc_file_open_value ||= ::Kernel.lambda do
-        print "proc_file_open invoked.\n"
+    def lambda_file_open
+      @lambda_file_open_value ||= ::Kernel.lambda do
+        print "lambda_file_open invoked.\n"
         nil
       end
     end
 
-    def proc_four
-      @proc_four_value ||= ::Kernel.lambda do
-        print "proc_four invoked.\n"
+    def lambda_four
+      @lambda_four_value ||= ::Kernel.lambda do
+        print "lambda_four invoked.\n"
         nil
       end
     end
 
-    def proc_one
-      @proc_one_value ||= ::Kernel.lambda do
-        print "proc_one invoked.\n"
+    def lambda_one
+      @lambda_one_value ||= ::Kernel.lambda do
+        print "lambda_one invoked.\n"
         nil
       end
     end
 
-    def proc_three
-      @proc_three_value ||= ::Kernel.lambda do
-        print "proc_three invoked.\n"
+    def lambda_three
+      @lambda_three_value ||= ::Kernel.lambda do
+        print "lambda_three invoked.\n"
         nil
       end
     end
 
-    def proc_two
-      @proc_two_value ||= ::Kernel.lambda do
-        print "proc_two invoked.\n"
+    def lambda_two
+      @lambda_two_value ||= ::Kernel.lambda do
+        print "lambda_two invoked.\n"
         nil
       end
     end

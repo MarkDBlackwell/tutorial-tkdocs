@@ -77,9 +77,9 @@ module ::StackingOrder
 
     private
 
-    def proc_raise
-      @proc_raise_value ||= ::Kernel.lambda do
-        print "proc_raise invoked.\n"
+    def lambda_raise
+      @lambda_raise_value ||= ::Kernel.lambda do
+        print "lambda_raise invoked.\n"
         l_little.raise
         nil
       end
@@ -87,7 +87,7 @@ module ::StackingOrder
 
     def raise_later
       milliseconds = 3000
-      ::Tk.after milliseconds, proc_raise
+      ::Tk.after milliseconds, lambda_raise
       nil
     end
 

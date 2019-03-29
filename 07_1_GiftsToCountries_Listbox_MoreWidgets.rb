@@ -108,7 +108,7 @@ module ::GiftsToCountries
     def b_send
       @b_send_value ||= begin
         b = ::Tk::Tile::Button.new f_content
-        b.command proc_gift_send # Callback.
+        b.command lambda_gift_send # Callback.
         b.default :active
         b.text 'Send Gift'
       end
@@ -215,7 +215,7 @@ module ::GiftsToCountries
 
 # Because the ListboxSelect event normally is generated only when the user
 # makes a change, start by explicitly showing the population:
-      proc_country_select.call
+      lambda_country_select.call
       ::Tk.mainloop
       nil
     end
@@ -255,11 +255,11 @@ module ::GiftsToCountries
 # - when the user double clicks the list; and
 # - when they hit the Return key.
 
-      li_countries.bind '<ListboxSelect>', proc_country_select
-      li_countries.bind 'Double-1', proc_gift_send
+      li_countries.bind '<ListboxSelect>', lambda_country_select
+      li_countries.bind 'Double-1', lambda_gift_send
 
 # Backstop every other widget in the tree:
-      root.bind 'Return', proc_gift_send
+      root.bind 'Return', lambda_gift_send
       nil
     end
 
@@ -287,14 +287,14 @@ module ::GiftsToCountries
       nil
     end
 
-    def proc_country_select
+    def lambda_country_select
 # Called when the selection in the listbox changes.
 # Figure out which country is currently selected, and look up its country code
 # and population. Update the status message with the new population. Clear the
 # message about the gift being sent, so it doesn't stick around after we start
 # doing other things:
 
-      @proc_country_select_value ||= ::Kernel.lambda do
+      @lambda_country_select_value ||= ::Kernel.lambda do
         selected = li_countries.curselection
         v_sent.value = ''
         return unless 1 == selected.length
@@ -304,7 +304,7 @@ module ::GiftsToCountries
       end
     end
 
-    def proc_gift_send
+    def lambda_gift_send
 # Called when the user double clicks an item in the listbox, presses the
 # 'Send Gift' button, or presses the Return key.
 # In case the selected item is scrolled out of view, make sure it is visible.
@@ -312,7 +312,7 @@ module ::GiftsToCountries
 # Figure out which country is selected, and which gift is selected with the
 # radiobuttons. Send the gift, and provide feedback that it was sent:
 
-      @proc_gift_send_value ||= ::Kernel.lambda do
+      @lambda_gift_send_value ||= ::Kernel.lambda do
         selected = li_countries.curselection
         return unless 1 == selected.length
 

@@ -60,19 +60,19 @@ module ::OneHundredLines
 
     def li_listbox
       @li_listbox_value ||= begin
-        proc_set = proc {|*args| scr_scrollbar.set(*args)}
+        lambda_set = ::Kernel.lambda {|*args| scr_scrollbar.set(*args)}
         l = ::TkListbox.new f_content
         l.height 5
-        l.yscrollcommand proc_set
+        l.yscrollcommand lambda_set
         l.grid column: 0, row: 0, sticky: :wnes
       end
     end
 
     def scr_scrollbar
       @scr_scrollbar_value ||= begin
-        proc_view = proc {|*args| li_listbox.yview(*args)}
+        lambda_view = ::Kernel.lambda {|*args| li_listbox.yview(*args)}
         s = ::Tk::Tile::Scrollbar.new f_content
-        s.command proc_view
+        s.command lambda_view
         s.orient :vertical
         s.grid column: 1, row: 0, sticky: :ns
       end

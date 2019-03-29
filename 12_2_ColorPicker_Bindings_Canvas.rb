@@ -122,7 +122,7 @@ module ::ColorPicker
     private
 
     def color_initial_set
-      proc_color_set.call :black
+      lambda_color_set.call :black
       nil
     end
 
@@ -133,27 +133,27 @@ module ::ColorPicker
     end
 
     def event_bindings_set_up_canvas
-      ca_canvas.bind '1',         proc_segment_start,  '%x %y'
-      ca_canvas.bind 'B1-Motion', proc_segment_append, '%x %y'
+      ca_canvas.bind '1',         lambda_segment_start,  '%x %y'
+      ca_canvas.bind 'B1-Motion', lambda_segment_append, '%x %y'
       nil
     end
 
     def event_bindings_set_up_color_pickers
-      car_color_picker_black.bind '1', proc_color_set, :black
-      car_color_picker_blue. bind '1', proc_color_set, :blue
-      car_color_picker_red.  bind '1', proc_color_set, :red
+      car_color_picker_black.bind '1', lambda_color_set, :black
+      car_color_picker_blue. bind '1', lambda_color_set, :blue
+      car_color_picker_red.  bind '1', lambda_color_set, :red
       nil
     end
 
-    def proc_color_set
-      @proc_color_set_value ||= ::Kernel.lambda do |v|
+    def lambda_color_set
+      @lambda_color_set_value ||= ::Kernel.lambda do |v|
         Color.value = v
         nil
       end
     end
 
-    def proc_segment_append
-      @proc_segment_append_value ||= ::Kernel.lambda do |x_end, y_end|
+    def lambda_segment_append
+      @lambda_segment_append_value ||= ::Kernel.lambda do |x_end, y_end|
         options = { fill: Color.value }
         x_start, y_start = Position.value
         ::TkcLine.new ca_canvas, x_start, y_start, x_end, y_end, options
@@ -162,8 +162,8 @@ module ::ColorPicker
       end
     end
 
-    def proc_segment_start
-      @proc_segment_start_value ||= ::Kernel.lambda do |x,y|
+    def lambda_segment_start
+      @lambda_segment_start_value ||= ::Kernel.lambda do |x,y|
         Position.set x, y
         nil
       end

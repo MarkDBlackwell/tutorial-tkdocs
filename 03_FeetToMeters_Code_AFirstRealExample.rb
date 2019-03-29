@@ -82,7 +82,7 @@ module ::FeetToMeters
       column_2_set_up
       column_3_set_up
       pad_grid_boxes # Keep below where we fill the grid.
-      proc_calculate_and_focus.call
+      lambda_calculate_and_focus.call
       ::Tk.mainloop
       nil
     end
@@ -130,7 +130,7 @@ module ::FeetToMeters
 
     def column_3_row_3_set_up
       b = ::Tk::Tile::Button.new f_content
-      b.command proc_calculate_and_focus
+      b.command lambda_calculate_and_focus
       b.text 'Calculate'
       b.grid column: 3, row: 3, sticky: :w
       nil
@@ -151,8 +151,8 @@ module ::FeetToMeters
       nil
     end
 
-    def proc_calculate_and_focus
-      @proc_calculate_and_focus_value ||= ::Kernel.lambda do
+    def lambda_calculate_and_focus
+      @lambda_calculate_and_focus_value ||= ::Kernel.lambda do
         e_feet.focus
         decimal_digits = 4
         meters_per_foot = 0.3048
@@ -168,7 +168,7 @@ module ::FeetToMeters
     def return_bind
 # Backstops every other widget in the tree:
       root.bind 'Return' do
-        proc_calculate_and_focus.call
+        lambda_calculate_and_focus.call
       end
       nil
     end

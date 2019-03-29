@@ -75,7 +75,7 @@ module ::EventBindings
     end
 
     def label_bind_drag
-      l_label.bind 'B3-Motion', proc_drag, '%x %y'
+      l_label.bind 'B3-Motion', lambda_drag, '%x %y'
       nil
     end
 
@@ -95,8 +95,8 @@ module ::EventBindings
       nil
     end
 
-    def proc_drag
-      @proc_drag_value ||= ::Kernel.lambda do |x,y|
+    def lambda_drag
+      @lambda_drag_value ||= ::Kernel.lambda do |x,y|
         l_label[:text] = "Right button drag to #{x}, #{y}"
         nil
       end

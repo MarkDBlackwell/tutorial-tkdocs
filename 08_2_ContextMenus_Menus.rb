@@ -94,7 +94,7 @@ module ::ContextMenus
         %w[ 3  App  Shift-F10 ]
       end
       events.each do |event|
-        root.bind event, proc_popup, '%X %Y'
+        root.bind event, lambda_popup, '%X %Y'
       end
       nil
     end
@@ -102,20 +102,20 @@ module ::ContextMenus
     def context_menu_items_add
       items = %w[ One Two Three ]
       items.each do |item|
-        me_context_menu.add :command, label: item, command: proc_item
+        me_context_menu.add :command, label: item, command: lambda_item
       end
       nil
     end
 
-    def proc_item
-      @proc_item_value ||= ::Kernel.lambda do
-        print "proc_item invoked.\n"
+    def lambda_item
+      @lambda_item_value ||= ::Kernel.lambda do
+        print "lambda_item invoked.\n"
         nil
       end
     end
 
-    def proc_popup
-      @proc_popup_value ||= ::Kernel.lambda do |x,y|
+    def lambda_popup
+      @lambda_popup_value ||= ::Kernel.lambda do |x,y|
         me_context_menu.popup x, y
         nil
       end
