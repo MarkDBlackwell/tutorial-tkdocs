@@ -90,53 +90,6 @@ module ::Menubars
 
     private
 
-    def menu_edit_items_add
-      me_edit.add :command,     label: 'Three',   command: lambda_three,      underline: 0
-      me_edit.add :command,     label: 'Four',    command: lambda_four,       underline: 0
-      nil
-    end
-
-    def menu_file_items_add
-      menu_file_items_file_actions_add
-      me_file.add :separator
-      menu_file_items_checkbutton_add
-      menu_file_items_radiobuttons_add
-      nil
-    end
-
-    def menu_file_items_checkbutton_add
-      me_file.add :checkbutton, label: 'Check',   command: lambda_check,      underline: 1, variable: v_check, onvalue: 1, offvalue: 0
-      nil
-    end
-
-    def menu_file_items_file_actions_add
-      me_file.add :command,     label: 'New',     command: lambda_file_new,   underline: 0
-      me_file.add :command,     label: 'Open...', command: lambda_file_open,  underline: 0
-      me_file.add :command,     label: 'Close',   command: lambda_file_close, underline: 0
-      nil
-    end
-
-    def menu_file_items_radiobuttons_add
-      me_file.add :radiobutton, label: 'One',     command: lambda_one,        underline: 2, variable: v_radio, value: 1
-      me_file.add :radiobutton, label: 'Two',     command: lambda_two,        underline: 0, variable: v_radio, value: 2
-      nil
-    end
-
-    def menu_items_add
-      menubar_create
-      menu_edit_items_add
-      menu_file_items_add
-      nil
-    end
-
-    def menubar_create
-      tear_off_prevent # Keep before any menu creation.
-      root[:menu] = me_menubar
-      me_menubar.add :cascade, menu: me_file, label: 'File', underline: 0
-      me_menubar.add :cascade, menu: me_edit, label: 'Edit', underline: 0
-      nil
-    end
-
     def lambda_check
       @lambda_check_value ||= ::Kernel.lambda do
         print "lambda_check invoked.\n"
@@ -191,6 +144,53 @@ module ::Menubars
         print "lambda_two invoked.\n"
         nil
       end
+    end
+
+    def menu_edit_items_add
+      me_edit.add :command,     label: 'Three',   command: lambda_three,      underline: 0
+      me_edit.add :command,     label: 'Four',    command: lambda_four,       underline: 0
+      nil
+    end
+
+    def menu_file_items_add
+      menu_file_items_file_actions_add
+      me_file.add :separator
+      menu_file_items_checkbutton_add
+      menu_file_items_radiobuttons_add
+      nil
+    end
+
+    def menu_file_items_checkbutton_add
+      me_file.add :checkbutton, label: 'Check',   command: lambda_check,      underline: 1, variable: v_check, onvalue: 1, offvalue: 0
+      nil
+    end
+
+    def menu_file_items_file_actions_add
+      me_file.add :command,     label: 'New',     command: lambda_file_new,   underline: 0
+      me_file.add :command,     label: 'Open...', command: lambda_file_open,  underline: 0
+      me_file.add :command,     label: 'Close',   command: lambda_file_close, underline: 0
+      nil
+    end
+
+    def menu_file_items_radiobuttons_add
+      me_file.add :radiobutton, label: 'One',     command: lambda_one,        underline: 2, variable: v_radio, value: 1
+      me_file.add :radiobutton, label: 'Two',     command: lambda_two,        underline: 0, variable: v_radio, value: 2
+      nil
+    end
+
+    def menu_items_add
+      menubar_create
+      menu_edit_items_add
+      menu_file_items_add
+      nil
+    end
+
+    def menubar_create
+      tear_off_prevent # Keep before any menu creation.
+      root[:menu] = me_menubar
+      me_menubar.add :cascade, menu: me_file, label: 'File', underline: 0
+      me_menubar.add :cascade, menu: me_edit, label: 'Edit', underline: 0
+      nil
     end
 
     def weights_column_and_row_set_up

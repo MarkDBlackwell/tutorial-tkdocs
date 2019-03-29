@@ -148,14 +148,6 @@ module ::Decoration
       nil
     end
 
-    def palette_reselect
-      ca_canvas.itemconfigure :palette, outline: :white
-      ca_canvas.dtag :all,    :paletteSelected
-      ca_canvas.addtag        :paletteSelected, :withtag, :"palette#{Color.value.capitalize}"
-      ca_canvas.itemconfigure :paletteSelected, outline: :'#999999'
-      nil
-    end
-
     def lambda_color_set
       @lambda_color_set_value ||= ::Kernel.lambda do |v|
         Color.value = v
@@ -187,6 +179,14 @@ module ::Decoration
         ca_canvas.itemconfigure :currentLine, width: 1
         nil
       end
+    end
+
+    def palette_reselect
+      ca_canvas.itemconfigure :palette, outline: :white
+      ca_canvas.dtag :all,    :paletteSelected
+      ca_canvas.addtag        :paletteSelected, :withtag, :"palette#{Color.value.capitalize}"
+      ca_canvas.itemconfigure :paletteSelected, outline: :'#999999'
+      nil
     end
 
     def weights_column_and_row_set_up

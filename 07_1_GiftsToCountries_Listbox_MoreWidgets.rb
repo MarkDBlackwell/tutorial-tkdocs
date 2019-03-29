@@ -278,15 +278,6 @@ module ::GiftsToCountries
       column_2_set_up
     end
 
-    def population_show(index)
-      i = index
-      a = country_names.at i
-      b = country_codes.at i
-      c = country_populations.at i
-      v_status.value = "The population of #{a} (#{b}) is #{c}."
-      nil
-    end
-
     def lambda_country_select
 # Called when the selection in the listbox changes.
 # Figure out which country is currently selected, and look up its country code
@@ -322,6 +313,15 @@ module ::GiftsToCountries
         feedback_provide i
         nil
       end
+    end
+
+    def population_show(index)
+      i = index
+      a = country_names.at i
+      b = country_codes.at i
+      c = country_populations.at i
+      v_status.value = "The population of #{a} (#{b}) is #{c}."
+      nil
     end
 
     def weights_column_and_row_set_up

@@ -143,14 +143,6 @@ module ::FeetToMeters
       nil
     end
 
-    def pad_grid_boxes
-      ::TkWinfo.children(f_content).each do |widget|
-# Pad each grid box:
-        ::TkGrid.configure widget, padx: 5, pady: 5
-      end
-      nil
-    end
-
     def lambda_calculate_and_focus
       @lambda_calculate_and_focus_value ||= ::Kernel.lambda do
         e_feet.focus
@@ -163,6 +155,14 @@ module ::FeetToMeters
         end
         nil
       end
+    end
+
+    def pad_grid_boxes
+      ::TkWinfo.children(f_content).each do |widget|
+# Pad each grid box:
+        ::TkGrid.configure widget, padx: 5, pady: 5
+      end
+      nil
     end
 
     def return_bind
