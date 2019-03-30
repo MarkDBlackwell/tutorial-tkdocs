@@ -50,10 +50,8 @@ module ::ContinuousUpdate
     end
 
     def transfer_ascii_from_console
-      line = console_read
-      until 'stop' == line
+      until 'stop' == (line = console_read)
         stream_write line
-        line = console_read
       end
       nil
     end
