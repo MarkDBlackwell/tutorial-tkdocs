@@ -20,6 +20,7 @@ module ::ContinuousUpdate
 
     def main
       f_content.padding '4 4 4 4'
+      l_clock
       l_accumulator # Keep before reading the stream.
       v_clock.value = '1'
       lambda_clock_tick.call
@@ -54,7 +55,7 @@ module ::ContinuousUpdate
     end
 
     def read_schedule_later
-      milliseconds = 100
+      milliseconds = 500
       ::Tk.after milliseconds, lambda_stream_read
       nil
     end
@@ -64,7 +65,8 @@ module ::ContinuousUpdate
     end
 
     def stream_read
-      raw = stream.getc
+      entire_contents = nil
+      raw = stream.gets entire_contents
       return if raw.nil?
 
       s = raw.chomp
