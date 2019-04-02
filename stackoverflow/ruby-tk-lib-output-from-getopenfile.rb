@@ -3,34 +3,8 @@
 
 require 'tk'
 
-def extract_filenames(file_list_string)
-  except_brace_start = 1..-1
-  except_brace_end   = 0..-2
-  result = []
-  name_containing_spaces = nil # Predefine for block.
-  in_name_with_spaces = false
-  file_list_string.split(' ').each do |element|
-    if in_name_with_spaces
-      unless element.end_with? '}'
-        name_containing_spaces.push element
-      else
-        in_name_with_spaces = false
-        s_end = element.slice except_brace_end
-        name_containing_spaces.push "#{s_end}\""
-        result.push name_containing_spaces.join ' '
-      end
-    else
-      unless element.start_with? '{'
-        result.push element
-      else
-        in_name_with_spaces = true
-        s_start = element.slice except_brace_start
-        name_containing_spaces = ["\"#{s_start}"]
-      end
-    end
-  end
-  result.push name_containing_spaces.join ' ' if in_name_with_spaces
-  result
+def extract_filenames_as_ruby_array(file_list_string)
+  ::TkVariable.new(file_list_string).list
 end
 
 def files_open
@@ -46,7 +20,7 @@ def files_open
       filetypes: types,
       multiple: true,
       title: 'Select Files'
-  extract_filenames file_list_string
+  extract_filenames_as_ruby_array file_list_string
 end
 
 def lambda_files_open
