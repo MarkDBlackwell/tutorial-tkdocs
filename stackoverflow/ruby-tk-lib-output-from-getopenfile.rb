@@ -1,5 +1,7 @@
 # See:
 #  http://stackoverflow.com/questions/31964822/ruby-tk-lib-output-from-getopenfile
+#  http://ruby-doc.org/stdlib-2.2.5/libdoc/tk/rdoc/TkCore.html#method-i-getOpenFile
+#  http://www.tcl.tk/man/tcl8.5/TkCmd/getOpenFile.htm
 
 require 'tk'
 
@@ -16,7 +18,6 @@ def files_open
   extensions = %w[  {.csv}  {.txt}  *  ]
   types = descriptions.zip(extensions).map {|d,e| "{#{d}} #{e}" }
   file_list_string = ::Tk.getOpenFile \
-      defaultextension: 'csv',
       filetypes: types,
       multiple: true,
       title: 'Select Files'
