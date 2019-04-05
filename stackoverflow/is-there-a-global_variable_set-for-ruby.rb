@@ -27,8 +27,8 @@ info.each_with_index do |inf,index|
   check_buttons.push cb
 end
 
-p Kernel.global_variables.select{|e| e.id2name.start_with? '$var'}
+p Kernel.global_variables.select {|e| e.id2name.start_with? '$var'}
 p info.length.times.map {|i| Module.module_eval "$var#{i}.value"}
-p check_buttons.each.map {|e| (e.cget :variable).value}
+p check_buttons.map {|e| (e.cget :variable).value}
 
 Tk.mainloop
