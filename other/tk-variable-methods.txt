@@ -1,0 +1,29 @@
+TkVariable methods:
+
+=========================
+Good:
+
+set_bool, bool
+set_list, list
+set_numeric, numeric
+set_numlist, numlist
+set_string, string
+set_symbol, symbol
+set_value, value
+
+=========================
+Not use:
+
+set_default_value_type, default_value_type
+set_list_type
+set_numeric_type
+set_string_type
+set_symbol_type
+set_value_type
+set_variable, variable
+set_variable_type
+
+=========================
+Prefer regular Ruby instead of these:
+
+to_int
