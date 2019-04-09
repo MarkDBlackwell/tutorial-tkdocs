@@ -1,6 +1,7 @@
 # coding: utf-8
 
-# Copyright (C) 2019 Mark D. Blackwell.
+# See:
+#  http://stackoverflow.com/questions/55602789/how-can-i-determine-most-easily-the-keysyms-of-unusual-keys-on-my-keyboard-in-r
 
 require 'tk'
 require 'tkextlib/tile'
