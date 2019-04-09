@@ -22,7 +22,7 @@ module ::ContinuousUpdate
       f_content.padding '4 4 4 4'
       l_clock
       l_accumulator # Keep before reading the stream.
-      v_clock.value = '1'
+      v_clock.value = 1
       lambda_clock_tick.call
       lambda_stream_read.call
       ::Tk.mainloop
@@ -39,8 +39,7 @@ module ::ContinuousUpdate
 
     def lambda_clock_tick
       @lambda_clock_tick_value ||= ::Kernel.lambda do
-        time_new = 1 + v_clock.value.to_i
-        v_clock.value = time_new.to_s
+        v_clock.value = v_clock + 1
         clock_tick_schedule_later
         nil
       end
