@@ -3,7 +3,7 @@
 # Copyright (C) 2019 Mark D. Blackwell.
 
 # See:
-#   https://stackoverflow.com/questions/9112643/is-it-possible-to-use-unicode-characters-with-ruby-tk
+#   http://stackoverflow.com/questions/9112643/is-it-possible-to-use-unicode-characters-with-ruby-tk
 
 require 'tk'
 require 'tkextlib/tile'
