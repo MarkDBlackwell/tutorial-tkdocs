@@ -5,26 +5,18 @@
 
 require 'tk'
 
-module ::KeypressCapture
-  extend self
-
-  def lambda_keypress
-    @lambda_keypress ||= Kernel.lambda do |key_code, key_sym|
-      puts "lambda_keypress invoked with keycode #{key_code} and keysym #{key_sym}."
-    end
-  end
-
-  def main
-    root.bind :KeyPress, lambda_keypress, '%k %K'
-    Tk.mainloop
-  end
-
-  def root
-    $root ||= begin
-      Tk::Encoding.encoding = ''.encoding
-      TkRoot.new
-    end
+def lambda_keypress
+  @lambda_keypress ||= Kernel.lambda do |key_code, key_symbol|
+    puts "lambda_keypress invoked with keycode #{key_code} and keysym #{key_symbol}."
   end
 end
 
-::KeypressCapture.main
+def root
+  $root ||= begin
+    Tk::Encoding.encoding = ''.encoding
+    TkRoot.new
+  end
+end
+
+root.bind :KeyPress, lambda_keypress, '%k %K'
+Tk.mainloop
