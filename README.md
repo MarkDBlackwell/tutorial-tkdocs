@@ -24,6 +24,8 @@ Tested using Tk 8.5.12 and Ruby 2.2.5, on Windows 7.
 
 The
 [Tcl/Tk 8.5 Commands](http://www.tcl.tk/man/tcl8.5/TkCmd/contents.htm)
+documentation and the
+[Ruby Tk](http://ruby-doc.org/stdlib-2.2.5/libdoc/tk/rdoc/)
 documentation.
 
 The Ruby developer
