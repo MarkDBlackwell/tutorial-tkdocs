@@ -1,0 +1,51 @@
+> [T]o tell me which widget has the focus[...w]hat is the equivalent code in Ruby under Linux?
+
+Fairly equivalently, if you have three Tk objects (for example), then you can say (in Ruby):
+```ruby
+array = [tk_object_1, tk_object_2, tk_object_3]
+path = Tk.focus.path
+object = array.find {|e| e.path == path}
+```
+I managed to locate documentation for the `focus` method (in both the
+[Ruby wrapper](http://ruby-doc.org/stdlib-2.2.5/libdoc/tk/rdoc/Tk.html#method-c-focus)
+and the original
+[Tcl](http://www.tcl.tk/man/tcl8.5/TkCmd/focus.htm))
+and for the `path` method (in the
+[Ruby wrapper](http://ruby-doc.org/stdlib-2.2.5/libdoc/tk/rdoc/TkObject.html#method-i-path)).
+
+I wrote a program which demonstrates setting and getting the focus:
+```ruby
+```
+It works for me using Ruby 2.2.5 (with Tk 8.5.12) on Windows 7.
+
+> Is there a good book or article about low-level Ruby Tk? All the articles I have seen only cover the simplistic stuff.
+
+To my knowledge, no one has written a thorough description of Ruby's wrapper for Tk (at least, not in English). However, we have the wrapper's
+[RDoc](http://ruby-doc.org/stdlib-2.2.5/libdoc/tk/rdoc/)
+documentation, and we can read books describing how to use Tk from other languages. I think the best one (for Ruby purposes) is:
+
+    _Learning Perk/Tk_, Nancy Walsh: 1999:
+    http://www.amazon.com/Learning-Perl-Tk-Nancy-Walsh/dp/1565923146
+    http://www.alibris.com/Learning-Perl-TK-Nancy-Walsh/book/28329527
+    http://shop.oreilly.com/product/9781565923140.do
+
+    (along with its example code):
+    http://resources.oreilly.com/examples/9781565923140
+
+Also we can `grep` the wrapper's library source code (since it's installed on our computers).
+
+Doing so for the constant `TkToplevel` (for example) leads to the file `/Ruby/lib/ruby/2.2.0/tk/toplevel.rb` (or wherever that file resides on your system).
+
+By searching inside that file for the string `TkToplevel`, we uncover that it seems to be defined as an alias for class `Tk::Toplevel`, which is documented
+[here](http://ruby-doc.org/stdlib-2.2.5/libdoc/tk/rdoc/Tk/Toplevel.html).
+
+Ultimately it takes a fairly difficult effort to investigate how to do unusual things in Ruby with Tk.
+
+Good results regarding particular issues have been obtained by asking on the
+[Ruby forum](http://www.ruby-forum.com).
+
+The
+[TkDocs](http://tkdocs.com/tutorial/index.html)
+tutorial is very helpful, along with the Tcl language
+[Tk commands](http://www.tcl.tk/man/tcl8.5/TkCmd/contents.htm)
+reference documentation.
