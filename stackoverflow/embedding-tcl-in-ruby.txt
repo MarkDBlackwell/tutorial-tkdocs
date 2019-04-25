@@ -1,0 +1,49 @@
+> Embedding tcl in ruby[.] Is there any way to do this?
+
+I came across
+[this post](http://www.thecodingforums.com/threads/run-tcl-in-ruby.818976/#post-4454838)
+by
+[Matz](http://en.wikipedia.org/w/index.php?oldid=887170269&title=Yukihiro_Matsumoto)
+himself in 2005, from a thread called, "Run TCL in ruby".
+
+His example program (from the post) evaluates strings of Tcl code from Ruby without shelling out:
+```ruby
+```
+Its console output is:
+```
+".lab"
+""
+print by ruby
+puts by tcl/tk
+""
+```
+Quoting from his post:
+
+> The tcltklib extension, which comes with the standard distribution, invokes Tcl interpreter directly without any inter-process communication.
+
+To make it work, I needed to duplicate the following directories:
+
+1. `/c/Ruby/lib/tcltk/tcl8.5` as `/c/Ruby/lib/tcl8.5`
+1. `/c/Ruby/lib/tcltk/tk8.5` as `/c/Ruby/lib/tk8.5`
+
+(Possibly, your Ruby is installed somewhere else.)
+
+> I'd like to use this on a system with no GUI (x windows).
+
+In a reply post immediately below Matz's, Hidetoshi Nagai says:
+
+> If no need for Tk, an IP without Tk can be created. To do that, please call `TclTkIp.new(nil, false)`.
+
+So here is Matz's program, altered to run without a Tk graphics window:
+```ruby
+```
+Its console output is:
+```
+"{ aa bb cc }"
+"aabbcc"
+```
+These two programs worked for me, using Ruby 2.2.5 (with Tk 8.5.12) on Windows 7.
+
+For what it's worth, here is the
+[manual](http://github.com/ruby/tk/blob/master/MANUAL_tcltklib.eng)
+for `tcltklib`.
