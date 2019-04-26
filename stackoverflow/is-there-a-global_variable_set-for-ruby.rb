@@ -11,7 +11,7 @@ info = %w[orange apple banana grape watermelon]
 info.each_with_index do |inf,index|
   global_name = "$var#{index}"
 
-  cb = TkCheckButton.new $frame1
+  cb = Tk::Tile::CheckButton.new $frame1
   cb.text "#{inf}"
   cb.onvalue "#{inf}"
 

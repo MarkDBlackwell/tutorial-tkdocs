@@ -40,7 +40,7 @@ end
 
 def b_button_1
   @b_button_1 ||= begin
-    b = ::TkButton.new root
+    b = ::Tk::Tile::Button.new root
     b.command lambda_files_open
     b.text 'Open Files'
     b.grid column: 1, row: 1, sticky: :we
