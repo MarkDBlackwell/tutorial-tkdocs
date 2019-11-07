@@ -9,14 +9,14 @@ module ::Notebook
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -45,19 +45,19 @@ module ::Notebook
 # For each tab, create a frame, into which widgets can be gridded:
 
     def f_tab_1
-      @f_tab_1_value ||= ::Tk::Tile::Frame.new n_notebook
+      @f_tab_1_private ||= ::Tk::Tile::Frame.new n_notebook
     end
 
     def f_tab_2
-      @f_tab_2_value ||= ::Tk::Tile::Frame.new n_notebook
+      @f_tab_2_private ||= ::Tk::Tile::Frame.new n_notebook
     end
 
     def f_tab_3
-      @f_tab_3_value ||= ::Tk::Tile::Frame.new n_notebook
+      @f_tab_3_private ||= ::Tk::Tile::Frame.new n_notebook
     end
 
     def l_label_1
-      @l_label_1_value ||= begin
+      @l_label_1_private ||= begin
         l = ::Tk::Tile::Label.new f_tab_1
         l.text 'Text within tab one.'
         l.grid
@@ -65,7 +65,7 @@ module ::Notebook
     end
 
     def l_label_2
-      @l_label_2_value ||= begin
+      @l_label_2_private ||= begin
         l = ::Tk::Tile::Label.new f_tab_2
         l.text 'Text within tab two.'
         l.grid
@@ -73,7 +73,7 @@ module ::Notebook
     end
 
     def l_label_3
-      @l_label_3_value ||= begin
+      @l_label_3_private ||= begin
         l = ::Tk::Tile::Label.new f_tab_3
         l.text 'Text within tab three.'
         l.grid
@@ -81,7 +81,7 @@ module ::Notebook
     end
 
     def n_notebook
-      @n_notebook_value ||= begin
+      @n_notebook_private ||= begin
         n = ::Tk::Tile::Notebook.new f_content
         n.height 100
         n.width 200

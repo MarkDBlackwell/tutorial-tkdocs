@@ -9,14 +9,14 @@ module ::HelloWorld
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -43,7 +43,7 @@ module ::HelloWorld
   module GraphicalObjects
 
     def b_button
-      @b_button_value ||= begin
+      @b_button_private ||= begin
         b = ::Tk::Tile::TButton.new f_content
         b.text 'Hello, world!'
         b.grid

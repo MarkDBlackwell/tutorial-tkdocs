@@ -12,14 +12,14 @@ module ::NameUnicode
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -38,7 +38,7 @@ module ::NameUnicode
   module GraphicalObjects
 
     def b_submit
-      @b_submit_value ||= begin
+      @b_submit_private ||= begin
         b = ::Tk::Tile::Button.new f_content
         b.command lambda_name_print
         b.text 'Submit'
@@ -46,25 +46,25 @@ module ::NameUnicode
     end
 
     def e_name
-      @e_name_value ||= begin
+      @e_name_private ||= begin
         e = ::Tk::Tile::Entry.new f_content
         e.textvariable v_name
       end
     end
 
     def l_reflect
-      @l_reflect_value ||= begin
+      @l_reflect_private ||= begin
         l = ::Tk::Tile::Label.new f_content
         l.textvariable v_reflect
       end
     end
 
     def v_name
-      @v_name_value ||= ::TkVariable.new
+      @v_name_private ||= ::TkVariable.new
     end
 
     def v_reflect
-      @v_reflect_value ||= ::TkVariable.new
+      @v_reflect_private ||= ::TkVariable.new
     end
   end
 end
@@ -93,7 +93,7 @@ module ::NameUnicode
     end
 
     def lambda_name_print
-      @lambda_name_print_value ||= ::Kernel.lambda do
+      @lambda_name_print_private ||= ::Kernel.lambda do
         value = v_name.value
         v_reflect.value = value
         puts value.encoding

@@ -39,7 +39,7 @@ module ::UnknownOption
     end
 
     def v_bad
-      @v_bad_value ||= ::TkVariable.new
+      @v_bad_private ||= ::TkVariable.new
     end
   end
 end

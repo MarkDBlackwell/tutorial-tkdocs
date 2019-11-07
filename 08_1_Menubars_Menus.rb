@@ -9,7 +9,7 @@ module ::Menubars
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
@@ -17,11 +17,11 @@ module ::Menubars
 
     def me_menubar
 # There only can be a single fallback menubar in the program, so use a global:
-      $me_menubar_value ||= ::TkMenu.new root
+      $me_menubar_private ||= ::TkMenu.new root
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -57,19 +57,19 @@ module ::Menubars
   module GraphicalObjects
 
     def me_edit
-      @me_edit_value ||= ::TkMenu.new me_menubar
+      @me_edit_private ||= ::TkMenu.new me_menubar
     end
 
     def me_file
-      @me_file_value ||= ::TkMenu.new me_menubar
+      @me_file_private ||= ::TkMenu.new me_menubar
     end
 
     def v_check
-      @ch_check_value ||= ::TkVariable.new
+      @ch_check_private ||= ::TkVariable.new
     end
 
     def v_radio
-      @v_radio_value ||= ::TkVariable.new
+      @v_radio_private ||= ::TkVariable.new
     end
   end
 end
@@ -91,56 +91,56 @@ module ::Menubars
     private
 
     def lambda_check
-      @lambda_check_value ||= ::Kernel.lambda do
+      @lambda_check_private ||= ::Kernel.lambda do
         print "lambda_check invoked.\n"
         nil
       end
     end
 
     def lambda_file_close
-      @lambda_file_close_value ||= ::Kernel.lambda do
+      @lambda_file_close_private ||= ::Kernel.lambda do
         print "lambda_file_close invoked.\n"
         nil
       end
     end
 
     def lambda_file_new
-      @lambda_file_new_value ||= ::Kernel.lambda do
+      @lambda_file_new_private ||= ::Kernel.lambda do
         print "lambda_file_new invoked.\n"
         nil
       end
     end
 
     def lambda_file_open
-      @lambda_file_open_value ||= ::Kernel.lambda do
+      @lambda_file_open_private ||= ::Kernel.lambda do
         print "lambda_file_open invoked.\n"
         nil
       end
     end
 
     def lambda_four
-      @lambda_four_value ||= ::Kernel.lambda do
+      @lambda_four_private ||= ::Kernel.lambda do
         print "lambda_four invoked.\n"
         nil
       end
     end
 
     def lambda_one
-      @lambda_one_value ||= ::Kernel.lambda do
+      @lambda_one_private ||= ::Kernel.lambda do
         print "lambda_one invoked.\n"
         nil
       end
     end
 
     def lambda_three
-      @lambda_three_value ||= ::Kernel.lambda do
+      @lambda_three_private ||= ::Kernel.lambda do
         print "lambda_three invoked.\n"
         nil
       end
     end
 
     def lambda_two
-      @lambda_two_value ||= ::Kernel.lambda do
+      @lambda_two_private ||= ::Kernel.lambda do
         print "lambda_two invoked.\n"
         nil
       end

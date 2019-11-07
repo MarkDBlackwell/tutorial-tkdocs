@@ -9,14 +9,14 @@ module ::StackingOrder
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -43,7 +43,7 @@ module ::StackingOrder
   module GraphicalObjects
 
     def l_bigger
-      @l_bigger_value ||= begin
+      @l_bigger_private ||= begin
         l = ::Tk::Tile::Label.new f_content
         l.text 'Much Bigger Label'
         l.grid column: 0, row: 0, sticky: :w
@@ -51,7 +51,7 @@ module ::StackingOrder
     end
 
     def l_little
-      @l_little_value ||= begin
+      @l_little_private ||= begin
         l = ::Tk::Tile::Label.new f_content
         l.text 'Little'
         l.grid column: 0, row: 0, sticky: :w
@@ -78,7 +78,7 @@ module ::StackingOrder
     private
 
     def lambda_raise
-      @lambda_raise_value ||= ::Kernel.lambda do
+      @lambda_raise_private ||= ::Kernel.lambda do
         print "lambda_raise invoked.\n"
         l_little.raise
         nil

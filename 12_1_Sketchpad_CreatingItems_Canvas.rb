@@ -24,14 +24,14 @@ module ::Sketchpad
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -58,7 +58,7 @@ module ::Sketchpad
   module GraphicalObjects
 
     def ca_canvas
-      @ca_canvas_value ||= begin
+      @ca_canvas_private ||= begin
         c = ::TkCanvas.new f_content
         c.grid sticky: :wnes
       end
@@ -94,7 +94,7 @@ module ::Sketchpad
     end
 
     def lambda_segment_append
-      @lambda_segment_append_value ||= ::Kernel.lambda do |x_end, y_end|
+      @lambda_segment_append_private ||= ::Kernel.lambda do |x_end, y_end|
         x_start, y_start = Position.value
         ::TkcLine.new ca_canvas, x_start, y_start, x_end, y_end
         Position.set x_end, y_end
@@ -103,7 +103,7 @@ module ::Sketchpad
     end
 
     def lambda_segment_start
-      @lambda_segment_start_value ||= ::Kernel.lambda do |x,y|
+      @lambda_segment_start_private ||= ::Kernel.lambda do |x,y|
         Position.set x, y
         nil
       end

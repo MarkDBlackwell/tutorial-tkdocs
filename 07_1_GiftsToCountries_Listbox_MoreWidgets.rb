@@ -15,7 +15,7 @@ module ::GiftsToCountries
 #    - a parallel list of country populations
 
     def country_codes
-      @country_codes_value ||= %i[
+      @country_codes_private ||= %i[
           ar  au  be
           br  ca  cn
           dk  fi  fr
@@ -27,7 +27,7 @@ module ::GiftsToCountries
     end
 
     def country_names
-      @country_names_value ||= %i[
+      @country_names_private ||= %i[
           Argentina  Australia  Belgium
           Brazil  Canada  China
           Denmark  Finland  France
@@ -39,7 +39,7 @@ module ::GiftsToCountries
     end
 
     def country_populations
-      @country_populations_value ||= [
+      @country_populations_private ||= [
            41_000_000,     21_179_211,     10_584_534,
           185_971_537,     33_148_682,  1_323_128_240,
             5_457_415,      5_302_000,     64_102_140,
@@ -56,7 +56,7 @@ module ::GiftsToCountries
   module Gift
 
     def gifts
-      @gifts_value ||= begin
+      @gifts_private ||= begin
 # Names of the gifts we can send:
         values = %i[ Greeting\ Card  Flowers  Nastygram ]
         keys   = %i[ card            flowers  nastygram ]
@@ -72,14 +72,14 @@ module ::GiftsToCountries
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -106,7 +106,7 @@ module ::GiftsToCountries
   module GraphicalObjects
 
     def b_send
-      @b_send_value ||= begin
+      @b_send_private ||= begin
         b = ::Tk::Tile::Button.new f_content
         b.command lambda_gift_send # Callback.
         b.default :active
@@ -115,14 +115,14 @@ module ::GiftsToCountries
     end
 
     def l_send_label
-      @l_send_label_value ||= begin
+      @l_send_label_private ||= begin
         l = ::Tk::Tile::Label.new f_content
         l.text 'Send to country\'s leader:'
       end
     end
 
     def l_sent_label
-      @l_sent_label_value ||= begin
+      @l_sent_label_private ||= begin
         l = ::Tk::Tile::Label.new f_content
         l.anchor :center
         l.textvariable v_sent
@@ -130,7 +130,7 @@ module ::GiftsToCountries
     end
 
     def l_status_label
-      @l_status_label_value ||= begin
+      @l_status_label_private ||= begin
         l = ::Tk::Tile::Label.new f_content
         l.anchor :w
         l.textvariable v_status
@@ -138,7 +138,7 @@ module ::GiftsToCountries
     end
 
     def li_countries
-      @li_countries_value ||= begin
+      @li_countries_private ||= begin
         l = ::TkListbox.new f_content
         l.height 5
         l.listvariable v_country_names
@@ -146,21 +146,21 @@ module ::GiftsToCountries
     end
 
     def r_gift_0
-      @r_gift_0_value ||= begin
+      @r_gift_0_private ||= begin
         index = 0
         radiobutton_set_up index
       end
     end
 
     def r_gift_1
-      @r_gift_1_value ||= begin
+      @r_gift_1_private ||= begin
         index = 1
         radiobutton_set_up index
       end
     end
 
     def r_gift_2
-      @r_gift_2_value ||= begin
+      @r_gift_2_private ||= begin
         index = 2
         radiobutton_set_up index
       end
@@ -169,19 +169,19 @@ module ::GiftsToCountries
 # Create and initialize the linked variables we'll need in the interface:
 
     def v_country_names
-      @v_country_names_value ||= ::TkVariable.new country_names
+      @v_country_names_private ||= ::TkVariable.new country_names
     end
 
     def v_gift
-      @v_gift_value ||= ::TkVariable.new :card
+      @v_gift_private ||= ::TkVariable.new :card
     end
 
     def v_sent
-      @v_sent_value ||= ::TkVariable.new ''
+      @v_sent_private ||= ::TkVariable.new ''
     end
 
     def v_status
-      @v_status_value ||= ::TkVariable.new ''
+      @v_status_private ||= ::TkVariable.new ''
     end
 
     private
@@ -285,7 +285,7 @@ module ::GiftsToCountries
 # message about the gift being sent, so it doesn't stick around after we start
 # doing other things:
 
-      @lambda_country_select_value ||= ::Kernel.lambda do
+      @lambda_country_select_private ||= ::Kernel.lambda do
         selected = li_countries.curselection
         v_sent.value = ''
         return unless 1 == selected.length
@@ -303,7 +303,7 @@ module ::GiftsToCountries
 # Figure out which country is selected, and which gift is selected with the
 # radiobuttons. Send the gift, and provide feedback that it was sent:
 
-      @lambda_gift_send_value ||= ::Kernel.lambda do
+      @lambda_gift_send_private ||= ::Kernel.lambda do
         selected = li_countries.curselection
         return unless 1 == selected.length
 

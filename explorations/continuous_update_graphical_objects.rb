@@ -9,7 +9,7 @@ module ::ContinuousUpdate
   module GraphicalObjects
 
     def l_accumulator
-      @l_accumulator_value ||= begin
+      @l_accumulator_private ||= begin
         pixels = 200
         l = ::Tk::Tile::Label.new f_content
         l.textvariable v_accumulator
@@ -19,7 +19,7 @@ module ::ContinuousUpdate
     end
 
     def l_clock
-      @l_clock_value ||= begin
+      @l_clock_private ||= begin
         l = ::Tk::Tile::Label.new f_content
         l.textvariable v_clock
         l.grid sticky: 'w'
@@ -27,11 +27,11 @@ module ::ContinuousUpdate
     end
 
     def v_accumulator
-      @v_accumulator_value ||= ::TkVariable.new ''
+      @v_accumulator_private ||= ::TkVariable.new ''
     end
 
     def v_clock
-      @v_clock_value ||= ::TkVariable.new ''
+      @v_clock_private ||= ::TkVariable.new ''
     end
   end
 end

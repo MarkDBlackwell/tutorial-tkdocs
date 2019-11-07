@@ -9,23 +9,23 @@ module ::ContextMenus
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
     end
 
     def me_context_menu
-      @me_context_menu_value ||= ::TkMenu.new f_content
+      @me_context_menu_private ||= ::TkMenu.new f_content
     end
 
     def platform
 # Because this lacks Hungarian notation, don't use a global:
-      @platform_value ||= ::Tk.windowingsystem
+      @platform_private ||= ::Tk.windowingsystem
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -57,7 +57,7 @@ module ::ContextMenus
   module GraphicalObjects
 
     def f_frame_inner
-      @f_frame_inner_value ||= begin
+      @f_frame_inner_private ||= begin
         f = ::Tk::Tile::Frame.new f_content
         f.height 100
         f.width 200
@@ -108,14 +108,14 @@ module ::ContextMenus
     end
 
     def lambda_item
-      @lambda_item_value ||= ::Kernel.lambda do
+      @lambda_item_private ||= ::Kernel.lambda do
         print "lambda_item invoked.\n"
         nil
       end
     end
 
     def lambda_popup
-      @lambda_popup_value ||= ::Kernel.lambda do |x,y|
+      @lambda_popup_private ||= ::Kernel.lambda do |x,y|
         me_context_menu.popup x, y
         nil
       end

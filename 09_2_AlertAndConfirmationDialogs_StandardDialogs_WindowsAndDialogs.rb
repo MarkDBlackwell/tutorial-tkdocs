@@ -10,24 +10,24 @@ module ::AlertAndConfirmationDialogs
     extend self
 
     def details
-      @details_value ||= begin
+      @details_private ||= begin
         relevant = group.drop 1
         relevant.map {|e| e.center width}.join "\n"
       end
     end
 
     def program
-      @program_value ||= group.first.center width
+      @program_private ||= group.first.center width
     end
 
     private
 
     def group
-      @group_value ||= raw.lines.map(&:strip)
+      @group_private ||= raw.lines.map(&:strip)
     end
 
     def raw
-      @raw_value ||= <<END_RAW
+      @raw_private ||= <<END_RAW
   Program-name Program-version
   Copyright (c) Year Developer-name
   License
@@ -36,7 +36,7 @@ END_RAW
     end
 
     def width
-      @width_value ||= group.map(&:length).max
+      @width_private ||= group.map(&:length).max
     end
   end
 end
@@ -45,14 +45,14 @@ module ::AlertAndConfirmationDialogs
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -79,7 +79,7 @@ module ::AlertAndConfirmationDialogs
   module GraphicalObjects
 
     def f_frame_inner
-      @f_frame_inner_value ||= begin
+      @f_frame_inner_private ||= begin
         f = ::Tk::Tile::Frame.new f_content
         f.height 100
         f.width 200
@@ -107,7 +107,7 @@ module ::AlertAndConfirmationDialogs
     private
 
     def lambda_about
-      @lambda_about_value ||= ::Kernel.lambda do
+      @lambda_about_private ||= ::Kernel.lambda do
         ::Tk.messageBox message: About.program, detail: About.details
         nil
       end

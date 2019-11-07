@@ -9,14 +9,14 @@ module ::LoggingWindow
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -43,7 +43,7 @@ module ::LoggingWindow
   module GraphicalObjects
 
     def t_log
-      @t_log_value ||= begin
+      @t_log_private ||= begin
         t = ::TkText.new f_content
         t.height 24
         t.state :disabled

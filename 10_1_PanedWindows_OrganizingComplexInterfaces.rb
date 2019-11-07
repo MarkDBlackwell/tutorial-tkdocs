@@ -9,14 +9,14 @@ module ::PanedWindows
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -45,7 +45,7 @@ module ::PanedWindows
 # Create labelframes, into which widgets can be gridded:
 
     def la_horizontal_1
-      @la_horizontal_1_value ||= begin
+      @la_horizontal_1_private ||= begin
         l = labelframe_set_up pa_horizontal
         l.text 'Pane1'
         l.width 100
@@ -53,7 +53,7 @@ module ::PanedWindows
     end
 
     def la_horizontal_2
-      @la_horizontal_2_value ||= begin
+      @la_horizontal_2_private ||= begin
         l = labelframe_set_up pa_horizontal
         l.text 'Pane2'
         l.width 100
@@ -61,28 +61,28 @@ module ::PanedWindows
     end
 
     def la_vertical_3
-      @la_vertical_3_value ||= begin
+      @la_vertical_3_private ||= begin
         l = labelframe_set_up pa_vertical
         l.text 'Pane3'
       end
     end
 
     def la_vertical_4
-      @la_vertical_4_value ||= begin
+      @la_vertical_4_private ||= begin
         l = labelframe_set_up pa_vertical
         l.text 'Pane4'
       end
     end
 
     def pa_horizontal
-      @pa_horizontal_value ||= begin
+      @pa_horizontal_private ||= begin
         p = ::Tk::Tile::Paned.new f_content, orient: :horizontal
         p.grid column: 0, row: 0, sticky: :wnes
       end
     end
 
     def pa_vertical
-      @pa_vertical_value ||= begin
+      @pa_vertical_private ||= begin
         p = ::Tk::Tile::Paned.new f_content, orient: :vertical
         p.grid column: 0, row: 1, sticky: :wnes
       end

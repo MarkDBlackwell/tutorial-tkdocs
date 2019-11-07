@@ -32,14 +32,14 @@ module ::ColorPicker
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -66,28 +66,28 @@ module ::ColorPicker
   module GraphicalObjects
 
     def ca_canvas
-      @ca_canvas_value ||= begin
+      @ca_canvas_private ||= begin
         c = ::TkCanvas.new f_content
         c.grid sticky: :wnes
       end
     end
 
     def car_color_picker_black
-      @car_color_picker_black_value ||= begin
+      @car_color_picker_black_private ||= begin
         y_box = 60, 80
         color_picker_create y_box, :black
       end
     end
 
     def car_color_picker_blue
-      @car_color_picker_blue_value ||= begin
+      @car_color_picker_blue_private ||= begin
         y_box = 35, 55
         color_picker_create y_box, :blue
       end
     end
 
     def car_color_picker_red
-      @car_color_picker_red_value ||= begin
+      @car_color_picker_red_private ||= begin
         y_box = 10, 30
         color_picker_create y_box, :red
       end
@@ -146,14 +146,14 @@ module ::ColorPicker
     end
 
     def lambda_color_set
-      @lambda_color_set_value ||= ::Kernel.lambda do |v|
+      @lambda_color_set_private ||= ::Kernel.lambda do |v|
         Color.value = v
         nil
       end
     end
 
     def lambda_segment_append
-      @lambda_segment_append_value ||= ::Kernel.lambda do |x_end, y_end|
+      @lambda_segment_append_private ||= ::Kernel.lambda do |x_end, y_end|
         options = { fill: Color.value }
         x_start, y_start = Position.value
         ::TkcLine.new ca_canvas, x_start, y_start, x_end, y_end, options
@@ -163,7 +163,7 @@ module ::ColorPicker
     end
 
     def lambda_segment_start
-      @lambda_segment_start_value ||= ::Kernel.lambda do |x,y|
+      @lambda_segment_start_private ||= ::Kernel.lambda do |x,y|
         Position.set x, y
         nil
       end

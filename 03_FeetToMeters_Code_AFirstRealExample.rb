@@ -11,7 +11,7 @@ module ::FeetToMeters
     def f_content
 # There only can be a single main content frame (for the main window) in the
 # program, so use a global:
-      $f_content_value ||= begin
+      $f_content_private ||= begin
 # In order to make the entire visible background match that of its
 # contained widgets, use a frame:
         f = ::Tk::Tile::Frame.new root
@@ -24,7 +24,7 @@ module ::FeetToMeters
 
     def root
 # There only can be a single (Tk) root in the program, so use a global:
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -51,7 +51,7 @@ module ::FeetToMeters
   module GraphicalObjects
 
     def e_feet
-      @e_feet_value ||= begin
+      @e_feet_private ||= begin
         e = ::Tk::Tile::Entry.new f_content
         e.textvariable v_feet
         e.width 7
@@ -59,11 +59,11 @@ module ::FeetToMeters
     end
 
     def v_feet
-      @v_feet_value ||= ::TkVariable.new
+      @v_feet_private ||= ::TkVariable.new
     end
 
     def v_meters
-      @v_meters_value ||= ::TkVariable.new
+      @v_meters_private ||= ::TkVariable.new
     end
   end
 end
@@ -144,7 +144,7 @@ module ::FeetToMeters
     end
 
     def lambda_calculate_and_focus
-      @lambda_calculate_and_focus_value ||= ::Kernel.lambda do
+      @lambda_calculate_and_focus_private ||= ::Kernel.lambda do
         e_feet.focus
         decimal_digits = 4
         meters_per_foot = 0.3048

@@ -9,21 +9,21 @@ module ::OneHundredLines
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
     end
 
     def si_sizegrip
-      @si_sizegrip_value ||= begin
+      @si_sizegrip_private ||= begin
         s = ::Tk::Tile::SizeGrip.new root
         s.grid column: 0, row: 0, sticky: :es
       end
@@ -50,7 +50,7 @@ module ::OneHundredLines
   module GraphicalObjects
 
     def l_status_message
-      @l_status_message_value ||= begin
+      @l_status_message_private ||= begin
         l = ::Tk::Tile::Label.new f_content
         l.anchor :w
         l.text 'Status message here'
@@ -59,7 +59,7 @@ module ::OneHundredLines
     end
 
     def li_listbox
-      @li_listbox_value ||= begin
+      @li_listbox_private ||= begin
         lambda_set = ::Kernel.lambda {|*args| scr_scrollbar.set(*args)}
         l = ::TkListbox.new f_content
         l.height 5
@@ -69,7 +69,7 @@ module ::OneHundredLines
     end
 
     def scr_scrollbar
-      @scr_scrollbar_value ||= begin
+      @scr_scrollbar_private ||= begin
         lambda_view = ::Kernel.lambda {|*args| li_listbox.yview(*args)}
         s = ::Tk::Tile::Scrollbar.new f_content
         s.command lambda_view

@@ -6,11 +6,11 @@ module ::ContinuousUpdate
   module Shared
 
     def encoding_current
-      @encoding_current_value ||= ''.encoding
+      @encoding_current_private ||= ''.encoding
     end
 
     def stream
-      @stream_value ||= begin
+      @stream_private ||= begin
         external = encoding_current
         internal = encoding_current
         mode = "#{stream_mode}:#{external}:#{internal}"

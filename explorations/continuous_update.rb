@@ -38,7 +38,7 @@ module ::ContinuousUpdate
     end
 
     def lambda_clock_tick
-      @lambda_clock_tick_value ||= ::Kernel.lambda do
+      @lambda_clock_tick_private ||= ::Kernel.lambda do
         v_clock.value = v_clock + 1
         clock_tick_schedule_later
         nil
@@ -46,7 +46,7 @@ module ::ContinuousUpdate
     end
 
     def lambda_stream_read
-      @lambda_stream_read_value ||= ::Kernel.lambda do
+      @lambda_stream_read_private ||= ::Kernel.lambda do
         stream_read
         read_schedule_later
         nil
@@ -60,7 +60,7 @@ module ::ContinuousUpdate
     end
 
     def stream_mode
-      @stream_mode_value ||= 'rb'
+      @stream_mode_private ||= 'rb'
     end
 
     def stream_read

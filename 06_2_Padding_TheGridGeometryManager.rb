@@ -9,14 +9,14 @@ module ::Padding
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -43,21 +43,21 @@ module ::Padding
   module GraphicalObjects
 
     def b_cancel
-      @b_cancel_value ||= begin
+      @b_cancel_private ||= begin
         b = ::Tk::Tile::Button.new f_content
         b.text 'Cancel'
       end
     end
 
     def b_okay
-      @b_okay_value ||= begin
+      @b_okay_private ||= begin
         b = ::Tk::Tile::Button.new f_content
         b.text 'Okay'
       end
     end
 
     def ch_one
-      @ch_one_value ||= begin
+      @ch_one_private ||= begin
         checked = 1
         c = ::Tk::Tile::CheckButton.new f_content
         c.onvalue checkbutton_value_when_selected
@@ -67,7 +67,7 @@ module ::Padding
     end
 
     def ch_three
-      @ch_three_value ||= begin
+      @ch_three_private ||= begin
         checked = 1
         c = ::Tk::Tile::CheckButton.new f_content
         c.onvalue checkbutton_value_when_selected
@@ -77,7 +77,7 @@ module ::Padding
     end
 
     def ch_two
-      @ch_two_value ||= begin
+      @ch_two_private ||= begin
         unchecked = 0
         c = ::Tk::Tile::CheckButton.new f_content
         c.onvalue checkbutton_value_when_selected
@@ -87,11 +87,11 @@ module ::Padding
     end
 
     def e_name
-      @e_name_value ||= ::Tk::Tile::Entry.new f_content
+      @e_name_private ||= ::Tk::Tile::Entry.new f_content
     end
 
     def f_frame_inner
-      @f_frame_inner_value ||= begin
+      @f_frame_inner_private ||= begin
         f = ::Tk::Tile::Frame.new f_content
         f.borderwidth 5
         f.height 100
@@ -101,7 +101,7 @@ module ::Padding
     end
 
     def l_label_name
-      @l_label_name_value ||= begin
+      @l_label_name_private ||= begin
         l = ::Tk::Tile::Label.new f_content
         l.text 'Name'
       end

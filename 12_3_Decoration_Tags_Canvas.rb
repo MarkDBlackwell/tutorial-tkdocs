@@ -32,14 +32,14 @@ module ::Decoration
   module GraphicalHelper
 
     def f_content
-      $f_content_value ||= begin
+      $f_content_private ||= begin
         f = ::Tk::Tile::Frame.new root
         f.grid sticky: :wnes
       end
     end
 
     def root
-      $root_value ||= begin
+      $root_private ||= begin
         tell_tk_which_encoding_to_use
         ::TkRoot.new
       end
@@ -66,28 +66,28 @@ module ::Decoration
   module GraphicalObjects
 
     def ca_canvas
-      @ca_canvas_value ||= begin
+      @ca_canvas_private ||= begin
         c = ::TkCanvas.new f_content
         c.grid sticky: :wnes
       end
     end
 
     def car_color_picker_black
-      @car_color_picker_black_value ||= begin
+      @car_color_picker_black_private ||= begin
         y_box = 60, 80
         color_picker_create y_box, :black, :paletteBlack
       end
     end
 
     def car_color_picker_blue
-      @car_color_picker_blue_value ||= begin
+      @car_color_picker_blue_private ||= begin
         y_box = 35, 55
         color_picker_create y_box, :blue, :paletteBlue
       end
     end
 
     def car_color_picker_red
-      @car_color_picker_red_value ||= begin
+      @car_color_picker_red_private ||= begin
         y_box = 10, 30
         color_picker_create y_box, :red, :paletteRed
       end
@@ -149,7 +149,7 @@ module ::Decoration
     end
 
     def lambda_color_set
-      @lambda_color_set_value ||= ::Kernel.lambda do |v|
+      @lambda_color_set_private ||= ::Kernel.lambda do |v|
         Color.value = v
         palette_reselect
         nil
@@ -157,7 +157,7 @@ module ::Decoration
     end
 
     def lambda_segment_append
-      @lambda_segment_append_value ||= ::Kernel.lambda do |x_end, y_end|
+      @lambda_segment_append_private ||= ::Kernel.lambda do |x_end, y_end|
         segment_width_thicker = 2
         options = { fill: Color.value, width: segment_width_thicker, tags: :currentLine }
         x_start, y_start = Position.value
@@ -168,14 +168,14 @@ module ::Decoration
     end
 
     def lambda_segment_start
-      @lambda_segment_start_value ||= ::Kernel.lambda do |x,y|
+      @lambda_segment_start_private ||= ::Kernel.lambda do |x,y|
         Position.set x, y
         nil
       end
     end
 
     def lambda_stroke_done
-      @lambda_stroke_done_value ||= ::Kernel.lambda do
+      @lambda_stroke_done_private ||= ::Kernel.lambda do
         ca_canvas.itemconfigure :currentLine, width: 1
         nil
       end

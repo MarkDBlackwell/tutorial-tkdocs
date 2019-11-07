@@ -18,7 +18,7 @@ module ::ContinuousUpdate
     private
 
     def console_filehandle
-      @console_filehandle_value ||= begin
+      @console_filehandle_private ||= begin
         filename = 'con:' # If not on Windows, change this.
         mode = "r:#{encoding_current}:#{encoding_current}"
         ::File.open filename, mode
@@ -30,7 +30,7 @@ module ::ContinuousUpdate
     end
 
     def stream_mode
-      @stream_mode_value ||= 'w'
+      @stream_mode_private ||= 'w'
     end
 
     def stream_write(s)
