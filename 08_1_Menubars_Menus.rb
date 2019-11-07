@@ -29,8 +29,8 @@ module ::Menubars
 
     def tear_off_prevent
 #   See:
-# https://tkdocs.com/tutorial/menus.html
-# https://wiki.tcl-lang.org/page/Tearoff
+# http://tkdocs.com/tutorial/menus.html
+# http://wiki.tcl-lang.org/page/Tearoff
 
       ::TkOption.add '*tearOff', false
       nil
