@@ -74,6 +74,8 @@ module ::PanedWindows
       end
     end
 
+# Create paned windows:
+
     def pa_horizontal
       @pa_horizontal_private ||= begin
         p = ::Tk::Tile::Paned.new f_content, orient: :horizontal
