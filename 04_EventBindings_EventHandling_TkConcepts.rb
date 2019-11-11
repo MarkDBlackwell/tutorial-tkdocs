@@ -23,9 +23,10 @@ module ::EventBindings
     end
 
     def weights_column_and_row_default_set_up(*args)
+      first = 0
       args.reverse_each do |e|
-        ::TkGrid.columnconfigure e, 0, weight: 1
-        ::TkGrid.   rowconfigure e, 0, weight: 1
+        ::TkGrid.columnconfigure e, first, weight: 1
+        ::TkGrid.   rowconfigure e, first, weight: 1
       end
       nil
     end
