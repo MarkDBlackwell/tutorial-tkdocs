@@ -5,26 +5,26 @@ Hungarian notation for object instances of Tk classes:
 
 Chapter 3. A First (Real) Example:
 
-v_    variable          TkVariable
+v_    variable          TkVariable     ::TkVariable
 
 
 Chapter 5. Basic Widgets:
 
-f_    frame             Frame
-l_    label             Label
-b_    button            Button
-ch_   checkbutton       CheckButton
-r_    radiobutton       RadioButton
-e_    entry             Entry
+f_    frame             Frame          ::Tk::Tile::Frame
+l_    label             Label          ::Tk::Tile::Label
+b_    button            Button         ::Tk::Tile::Button
+ch_   checkbutton       CheckButton    ::Tk::Tile::CheckButton
+r_    radiobutton       RadioButton    ::Tk::Tile::Radiobutton
+e_    entry             Entry          ::Tk::Tile::Entry
 co_   combobox          Combobox
 
 
 Chapter 7. More Widgets:
 
-li_   listbox           Listbox
-scr_  scrollbar         Scrollbar
-si_   sizegrip          SizeGrip
-t_    text              TkText
+li_   listbox           Listbox        ::TkListbox
+scr_  scrollbar         Scrollbar      ::Tk::Tile::Scrollbar
+si_   sizegrip          SizeGrip       ::Tk::Tile::SizeGrip
+t_    text              TkText         ::TkText
 pr_   progressbar       Progressbar
 sca_  scale             Scale
 sp_   spinbox           TkSpinbox
@@ -32,7 +32,7 @@ sp_   spinbox           TkSpinbox
 
 Chapter 8. Menus:
 
-me_   menu bar          Menu
+me_   menu bar          Menu           ::TkMenu
 
 
 Chapter 9. Windows and Dialogs:
@@ -44,9 +44,9 @@ m_    messagebox        messageBox
 Chapter 10. Organizing Complex Interfaces:
 
 s_    separator         Separator
-la_   label frame       Labelframe
-pa_   paned window      Paned
-n_    notebook          Notebook
+la_   label frame       Labelframe     ::Tk::Tile::Labelframe
+pa_   paned window      Paned          ::Tk::Tile::Paned
+n_    notebook          Notebook       ::Tk::Tile::Notebook
 
 
 Chapter 11. Fonts, Colors, Images:
@@ -56,14 +56,14 @@ ph_   photo image       TkPhotoImage
 
 Chapter 12. Canvas:
 
-ca_   canvas            Canvas
+ca_   canvas            Canvas         ::TkCanvas
 cal_  canvas line       TkcLine
-car_  canvas rectangle  TkcRectangle
+car_  canvas rectangle  TkcRectangle   ::TkcRectangle
 
 
 Chapter 13. Text:
 
-t_    text              TkText
+t_    text              (see chapter 7.)
 
 
 Chapter 14. Tree:
@@ -74,30 +74,30 @@ tr_   tree view         Treeview
 ===================
 Sorted alphabetically:
 
-b_    button            Button
-ca_   canvas            Canvas
+b_    button            Button         ::Tk::Tile::Button
+ca_   canvas            Canvas         ::TkCanvas
 cal_  canvas line       TkcLine
-car_  canvas rectangle  TkcRectangle
-ch_   checkbutton       CheckButton
+car_  canvas rectangle  TkcRectangle   ::TkcRectangle
+ch_   checkbutton       CheckButton    ::Tk::Tile::CheckButton
 co_   combobox          Combobox
-e_    entry             Entry
-f_    frame             Frame
-l_    label             Label
-la_   label frame       Labelframe
-li_   listbox           Listbox
+e_    entry             Entry          ::Tk::Tile::Entry
+f_    frame             Frame          ::Tk::Tile::Frame
+l_    label             Label          ::Tk::Tile::Label
+la_   label frame       Labelframe     ::Tk::Tile::Labelframe
+li_   listbox           Listbox        ::TkListbox
 m_    messagebox        messageBox
-me_   menu bar          Menu
-n_    notebook          Notebook
-pa_   paned window      Paned
+me_   menu bar          Menu           ::TkMenu
+n_    notebook          Notebook       ::Tk::Tile::Notebook
+pa_   paned window      Paned          ::Tk::Tile::Paned
 ph_   photo image       TkPhotoImage
 pr_   progressbar       Progressbar
-r_    radiobutton       RadioButton
+r_    radiobutton       RadioButton    ::Tk::Tile::Radiobutton
 s_    separator         Separator
 sca_  scale             Scale
-scr_  scrollbar         Scrollbar
-si_   sizegrip          SizeGrip
+scr_  scrollbar         Scrollbar      ::Tk::Tile::Scrollbar
+si_   sizegrip          SizeGrip       ::Tk::Tile::SizeGrip
 sp_   spinbox           TkSpinbox
-t_    text              TkText
+t_    text              TkText         ::TkText
 to_   toplevel window   TkToplevel
 tr_   tree view         Treeview
-v_    variable          TkVariable
+v_    variable          TkVariable     ::TkVariable
