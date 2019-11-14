@@ -45,7 +45,7 @@ module ::HelloWorld
 
     def b_button
       @b_button_private ||= begin
-        b = ::Tk::Tile::TButton.new f_content
+        b = ::Tk::Tile::Button.new f_content
         b.text 'Hello, world!'
         b.grid
       end
