@@ -66,7 +66,7 @@ module ::Menubars
     end
 
     def v_check
-      @ch_check_private ||= ::TkVariable.new
+      @v_check_private ||= ::TkVariable.new
     end
 
     def v_radio
